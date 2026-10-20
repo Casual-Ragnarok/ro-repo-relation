@@ -55,3 +55,7 @@ Thor 原包位于 `ro-docs` 对应资料目录，是兼容性研究材料。REA 
 ## 维护入口
 
 只修 Warp 适配：改 WarpEdition，记录对应原胚哈希、会话和测试证据。改助手：改 ragexe-diff/assistant，构建后更新客户端发布制品。改自定义指令：改 casual-ro-server 对应特性分支，再合入测试分支验证。Nemo 和 rea 是参考/分析工具，除非修它们自身，否则不用同步修改。
+
+## 2004 旧客户端与 PRE 分支
+
+旧版资料仓库、实际安装目录、Nemo/REA、图形兼容 DLL 与服务端 `codex/pre-renewal` 的关系见 [2004 客户端与 PRE 服务端](legacy-2004.md)。它使用独立的 `output/pre2004` 工作流，不能与本文 2023 客户端、助手及打包流程混用。历史 `bot-player` 启动方式已迁移，执行前以对应分支的说明为准。

@@ -101,3 +101,7 @@ python py/package.py -y 20230817 -s 127.0.0.1 -k 0 -t "R:\RO\02-开发中客户�
 历史预览位于 Docker 工程 `tmp/pokemon-merge/preview/index.html`，属于本地分析产物。对外正式特色介绍在 `casual-ro-feature-showcase`。
 
 允许公开的是经授权的低分辨率、加水印缩略图及名称/形态检索信息。不要把原始 GRF、SPR/ACT、服务端源码、数据库、NPC 脚本或内部映射原样发布到展示站。
+
+## 2004 旧客户端与 PRE 分支
+
+旧版资料仓库、实际安装目录、Nemo/REA、图形兼容 DLL 与服务端 `codex/pre-renewal` 的关系见 [2004 客户端与 PRE 服务端](legacy-2004.md)。它使用独立的 `output/pre2004` 工作流，不能与本文 2023 客户端、助手及打包流程混用。历史 `bot-player` 启动方式已迁移，执行前以对应分支的说明为准。

@@ -68,6 +68,7 @@ flowchart TD
 |修改客户端 EXE 补丁选项|优先 `WarpEdition/Scripts` 与 `Patches`；原胚保存在 `ragexe-diff/diff/Warp`；生成结果放回客户端 `Ragexe/`，发布并同步服务端 MD5 白名单|
 |查看每个原胚哪些补丁可用|`WarpEdition/Docs/Patch-Support/README.md` 与 `matrix.csv`；失败代表当前脚本未通过，不等于不能适配|
 |提取最终 EXE 的三把封包密钥、核对文件 MD5|`ragexe-diff/py/packet/packet_keys.py`；MD5 是最终文件摘要，不是第四把封包密钥|
+|维护 2004 樱之花嫁客户端或 PRE 联服|先查 [旧客户端适配链](docs/legacy-2004.md)；客户端记录在数据仓库，协议改动在服务端 `codex/pre-renewal`|
 |分析原胚或参考另一套 Diff 实现|`rea` 辅助逆向；`D:\workspace\Gitlab\Nemo/Patches` 参考实现；最终修改落到目标工具的脚本|
 |修改 RO 助手逻辑或 UI|`ragexe-diff/assistant`；构建制品复制到客户端 `Assistant/runtime`，更新来源与校验清单|
 |修改启动前的更新界面、公告或主题|`ro-patcher`；集中配置在安装目录 `ro-patcher/config.json`，主题在 `ro-patcher/themes/`；不是 `ragexe-diff/assistant`|
@@ -79,6 +80,19 @@ flowchart TD
 |修改 GRF 下载页菜单/页尾|`cro-patch-grf`|
 |修改 NPC 索引菜单/页尾|先改 `hexo-store/tpl/summary/html`，生成后发布到正确的 `ro-npcs`，不要只改生成副本|
 |修改商城自身页尾或微信悬浮二维码|`hexo-store` 的商城主题；不要把 NPC 索引页尾直接套到商城|
+
+## 2004 樱之花嫁：另一条独立适配链
+
+本会话还涉及旧客户端数据仓库、实际安装副本和 PRE 协议适配，详见 [2004 客户端与 PRE 服务端](docs/legacy-2004.md)。它不属于上面的 2023 客户端打包链。
+
+|位置或项目|职责|与现有仓库的关系|
+|---|---|---|
+|[Cherry_Blossom_Bride_FullClient_2004](https://huggingface.co/datasets/EXPM02/Cherry_Blossom_Bride_FullClient_2004)|2004 完整客户端资料、补丁记录和开关脚本；本地位于 `D:\workspace\ro\Cherry_Blossom_Bride_FullClient_2004`|Hugging Face 数据集 Git 仓库，不是 GitHub 项目，也不是 `casual-ro-client-patch` 子目录|
+|`R:\RO\04-GF\2004樱之花嫁`|实际运行的旧客户端及图形兼容 DLL|安装目录，不是上述数据仓库的自动同步副本|
+|`casual-ro-server` / `codex/pre-renewal`|2004 协议与复兴前规则适配|同一个服务端仓库的分支，不是另一套 GitHub 服务端；当前主工作区仍是 `codex/test-2023`|
+|[dgVoodoo2](https://github.com/dege-diosg/dgVoodoo2)|将旧 DirectX 图形调用转换到现代图形接口|旧客户端的运行组件；不是 REA、Nemo 或服务端的子模块|
+
+REA 提供分析证据，Nemo 提供补丁实现参考；补丁记录和可重复开关归入旧客户端数据仓库。PRE 只是规则模式，不会自动把 PACKETVER 改成 2004；服务端分支有独立构建、启动和回退入口。
 
 ## 本项目已经明确的约定
 

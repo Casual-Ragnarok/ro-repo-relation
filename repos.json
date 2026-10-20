@@ -10,7 +10,23 @@
       "origin": "git@ro.github.com:Casual-Ragnarok/casual-ro-server.git",
       "branch_snapshot": "codex/test-2023",
       "role": "服务端源码与特性",
-      "kind": "source"
+      "kind": "source",
+      "branch_workflows": [
+        {
+          "branch": "codex/pre-renewal",
+          "role": "2004 客户端协议与 PRE 规则适配",
+          "documentation": "docs/Pre-Renewal-2004-Compatibility.md",
+          "build": "bin/build-pre2004.ps1",
+          "start": "bin/start-pre2004.ps1",
+          "runtime": "output/pre2004/runtime",
+          "packetver": 20040317,
+          "note": "当前工作区仍为 codex/test-2023；候选协议标签不等于客户端唯一发布日期；本次未启动或重新验收"
+        },
+        {
+          "branch": "codex/pre-renewal-bot-backup-20261017",
+          "role": "迁移 master 前的历史分支，供回溯，不是当前 PRE 启动入口"
+        }
+      ]
     },
     {
       "name": "casual-ro-server-docker",
@@ -279,6 +295,66 @@
       "target": "ro-docs",
       "type": "external-documentation-link",
       "automation": "configured-browser-navigation"
+    },
+    {
+      "source": "Cherry_Blossom_Bride_FullClient_2004",
+      "target": "2004 樱之花嫁安装目录",
+      "type": "legacy-client-reference-and-patch-tools",
+      "automation": "manual-installation-and-verification"
+    },
+    {
+      "source": "rea",
+      "target": "Cherry_Blossom_Bride_FullClient_2004",
+      "type": "legacy-binary-analysis-evidence",
+      "automation": "analysis-tool-only"
+    },
+    {
+      "source": "Nemo",
+      "target": "Cherry_Blossom_Bride_FullClient_2004",
+      "type": "legacy-patch-implementation-reference",
+      "automation": "reference-only"
+    },
+    {
+      "source": "dgVoodoo2",
+      "target": "2004 樱之花嫁安装目录",
+      "type": "directx7-graphics-runtime",
+      "automation": "manual-release-artifact-copy"
+    },
+    {
+      "source": "casual-ro-server",
+      "target": "2004 樱之花嫁安装目录",
+      "type": "legacy-login-character-map-protocol-contract",
+      "automation": "branch-specific-build-and-runtime"
+    },
+    {
+      "source": "rea",
+      "target": "REA/jadx-headless-mcp",
+      "type": "git-submodule",
+      "automation": "explicit-submodule-checkout"
+    },
+    {
+      "source": "rea",
+      "target": "REA/binwalk",
+      "type": "git-submodule",
+      "automation": "explicit-submodule-checkout"
+    },
+    {
+      "source": "rea",
+      "target": "REA/unblob",
+      "type": "git-submodule",
+      "automation": "explicit-submodule-checkout"
+    },
+    {
+      "source": "rea",
+      "target": "REA/ghidra-nativeaot",
+      "type": "git-submodule",
+      "automation": "explicit-submodule-checkout"
+    },
+    {
+      "source": "rea",
+      "target": "REA/wakaru",
+      "type": "git-submodule",
+      "automation": "explicit-submodule-checkout"
     }
   ],
   "external_targets": [
@@ -317,6 +393,72 @@
       "type": "operator-configured-http-service",
       "source_repository": "ro-patcher",
       "note": "模板 manifestUrl/feedUrl 为空；未验证在线托管，不等同于 grf.casualro.top"
+    },
+    {
+      "name": "Cherry_Blossom_Bride_FullClient_2004",
+      "type": "client-dataset-git-repository",
+      "path": "D:\\workspace\\ro\\Cherry_Blossom_Bride_FullClient_2004",
+      "remote": "git@hf.co:datasets/EXPM02/Cherry_Blossom_Bride_FullClient_2004",
+      "url": "https://huggingface.co/datasets/EXPM02/Cherry_Blossom_Bride_FullClient_2004",
+      "branch_snapshot": "main",
+      "documentation": "docs/legacy-2004.md",
+      "note": "完整客户端资料、补丁记录及开关工具；不是 GitHub 源码仓库或安装目录"
+    },
+    {
+      "name": "2004 樱之花嫁安装目录",
+      "type": "installation",
+      "path": "R:\\RO\\04-GF\\2004樱之花嫁",
+      "launcher": "_开始游戏.cmd",
+      "executable": "2004_Ragexe_20261017_patched.exe",
+      "configuration": "data/clientinfo.xml",
+      "note": "当前脚本为 /account:clientinfo.xml；rea-local-login.xml 是历史测试名，不自动同步数据仓库"
+    },
+    {
+      "name": "dgVoodoo2",
+      "type": "external-graphics-runtime",
+      "github": "https://github.com/dege-diosg/dgVoodoo2",
+      "release_used": "v2.87.5",
+      "artifacts": [
+        "MS/x86/DDraw.dll",
+        "MS/x86/D3DImm.dll",
+        "dgVoodoo.conf"
+      ],
+      "note": "旧客户端安装目录内的图形兼容组件；非源码子模块"
+    },
+    {
+      "name": "REA/jadx-headless-mcp",
+      "type": "analysis-tool-source-submodule",
+      "path": "D:/workspace/Github/rea/third_party/jadx-headless-mcp",
+      "remote": "https://github.com/1013503897/jadx-headless-mcp.git",
+      "note": "核对 .gitmodules；未验证检出或运行状态"
+    },
+    {
+      "name": "REA/binwalk",
+      "type": "analysis-tool-source-submodule",
+      "path": "D:/workspace/Github/rea/third_party/binwalk",
+      "remote": "https://github.com/ReFirmLabs/binwalk.git",
+      "note": "核对 .gitmodules；未验证检出或运行状态"
+    },
+    {
+      "name": "REA/unblob",
+      "type": "analysis-tool-source-submodule",
+      "path": "D:/workspace/Github/rea/third_party/unblob",
+      "remote": "https://github.com/onekey-sec/unblob.git",
+      "note": "核对 .gitmodules；未验证检出或运行状态"
+    },
+    {
+      "name": "REA/ghidra-nativeaot",
+      "type": "analysis-tool-source-submodule",
+      "path": "D:/workspace/Github/rea/third_party/ghidra-nativeaot",
+      "remote": "https://github.com/Washi1337/ghidra-nativeaot.git",
+      "note": "核对 .gitmodules；未验证检出或运行状态"
+    },
+    {
+      "name": "REA/wakaru",
+      "type": "analysis-tool-source-submodule",
+      "path": "D:/workspace/Github/rea/third_party/wakaru",
+      "remote": "https://github.com/pionxzh/wakaru.git",
+      "note": "核对 .gitmodules；未验证检出或运行状态"
     }
   ],
   "worktrees": [
