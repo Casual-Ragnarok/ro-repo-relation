@@ -59,6 +59,14 @@ hexo-store/volumes/hexo/source/_posts 下的 NPC 模块资料
 
 商城自己的页尾保持原主题行为，微信二维码为鼠标悬浮显示；不要因为其他站点页尾固定展示二维码就一起替换商城。只修 NPC 索引不应顺带触发商城全站重构或部署。
 
+## 官网与桌面登陆器的关系
+
+`ro-patcher` 的「樱花来信」「月夜营地」主题参考官网视觉，插画取自 `casualro.top/assets/hero-sakura.png` 与 `assets/promo-night.png`，已复制为本地主题素材。官网更新不会自动更新登陆器的 CSS 或图片。
+
+登陆器示例配置中的官网、资源、文档入口分别指向 `casualro.top`、`grf.casualro.top`、`docs.casualro.top`，这些是外部浏览器导航关系。`announcements.feedUrl` 和 `updates.manifestUrl` 在模板中均为空：公告需要独立配置 JSON 数据源，补丁需要独立配置 JSON 清单，不能因首页或下载页可访问就认定自动更新服务已经部署。
+
+`ro-docs` 的 `docs/01-developer/03-resources/Thor_Patcher/` 保存 Thor 原包与社区皮肤资料，是研究参考，未建立新登陆器对旧皮肤或补丁的自动兼容。详细分工见 [登陆器与更新链](launcher-and-updates.md)。
+
 ## 旧域名与旧说明
 
 本机看到 `ro-docs` 和 `ro-npcs` 根目录 CNAME 仍有 `*.ragnarok.buzz`，各自 docs/CNAME 为 `*.casualro.top`。有效入口必须结合实际 Pages 发布目录判断。

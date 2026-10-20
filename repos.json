@@ -31,12 +31,31 @@
       "kind": "packaging"
     },
     {
+      "name": "ro-patcher",
+      "path": "D:\\workspace\\Github\\ro-patcher",
+      "github": "https://github.com/Casual-Ragnarok/ro-patcher",
+      "origin": "git@ro.github.com:Casual-Ragnarok/ro-patcher.git",
+      "branch_snapshot": "main",
+      "role": "Electron 游戏更新登陆器、主题、JSON 公告与补丁清单工具",
+      "kind": "launcher",
+      "entry_points": [
+        "src/main.cjs",
+        "src/core/updater.cjs",
+        "config.example.json",
+        "themes/",
+        "scripts/make-patch.cjs"
+      ],
+      "artifact": "dist/win-unpacked",
+      "deployment_directory": "<RO客户端>/ro-patcher/",
+      "documentation": "docs/launcher-and-updates.md"
+    },
+    {
       "name": "ragexe-diff",
       "path": "D:\\workspace\\Github\\ragexe-diff",
       "github": "https://github.com/Casual-Ragnarok/ragexe-diff",
       "origin": "git@ro.github.com:Casual-Ragnarok/ragexe-diff.git",
       "branch_snapshot": "main",
-      "role": "Ragexe 补丁和 RO 助手开发",
+      "role": "原胚、Diff 会话、封包密钥检查与 RO 助手源码",
       "kind": "source"
     },
     {
@@ -110,6 +129,34 @@
       "branch_snapshot": "main",
       "role": "仓库关系索引",
       "kind": "documentation"
+    },
+    {
+      "name": "WarpEdition",
+      "path": "D:\\workspace\\Github\\WarpEdition",
+      "github": "https://github.com/Casual-Ragnarok/WarpEdition",
+      "origin": "git@ro.github.com:Casual-Ragnarok/WarpEdition.git",
+      "branch_snapshot": "master",
+      "role": "Warp 补丁适配、逐原胚会话与支持矩阵",
+      "kind": "source"
+    },
+    {
+      "name": "rea",
+      "path": "D:\\workspace\\Github\\rea",
+      "github": "https://github.com/EXP-Tools/rea",
+      "origin": "git@github.com:EXP-Tools/rea.git",
+      "upstream": "https://github.com/morluto/rea.git",
+      "branch_snapshot": "main",
+      "role": "二进制逆向分析工具",
+      "kind": "analysis-tool"
+    },
+    {
+      "name": "Nemo",
+      "path": "D:\\workspace\\Gitlab\\Nemo",
+      "gitlab": "https://gitlab.com/4144/Nemo",
+      "origin": "https://gitlab.com/4144/Nemo.git",
+      "branch_snapshot": "master",
+      "role": "另一套 Diff 工具与脚本参考",
+      "kind": "patch-tool"
     }
   ],
   "relations": [
@@ -117,12 +164,6 @@
       "source": "casual-ro-server-docker",
       "target": "casual-ro-server",
       "type": "reviewed-config-migration",
-      "automation": "manual-or-reviewed-transfer"
-    },
-    {
-      "source": "ragexe-diff",
-      "target": "casual-ro-client-patch",
-      "type": "patched-exe-and-assistant-artifacts",
       "automation": "manual-or-reviewed-transfer"
     },
     {
@@ -148,6 +189,96 @@
       "target": "casual-ro-feature-showcase",
       "type": "navigation-link",
       "automation": "manual-or-reviewed-transfer"
+    },
+    {
+      "source": "ragexe-diff",
+      "target": "WarpEdition",
+      "type": "original-executables-and-session-reference",
+      "automation": "manual-or-reviewed-transfer"
+    },
+    {
+      "source": "Nemo",
+      "target": "WarpEdition",
+      "type": "patch-implementation-reference",
+      "automation": "manual-or-reviewed-transfer"
+    },
+    {
+      "source": "rea",
+      "target": "WarpEdition",
+      "type": "binary-analysis-and-validation",
+      "automation": "manual-or-reviewed-transfer"
+    },
+    {
+      "source": "WarpEdition",
+      "target": "casual-ro-client-patch",
+      "type": "patched-executable-artifacts",
+      "automation": "manual-or-reviewed-transfer"
+    },
+    {
+      "source": "ragexe-diff",
+      "target": "casual-ro-client-patch",
+      "type": "assistant-dll-and-electron-artifacts",
+      "automation": "manual-or-reviewed-transfer"
+    },
+    {
+      "source": "ragexe-diff",
+      "target": "casual-ro-server",
+      "type": "final-exe-key-and-md5-verification",
+      "automation": "manual-or-reviewed-transfer"
+    },
+    {
+      "source": "casual-ro-client-patch",
+      "target": "ro-patcher",
+      "type": "release-files-for-json-manifest",
+      "automation": "not-integrated-manual-preparation",
+      "note": "制品衔接方向；package.py 尚未自动生成新登陆器清单"
+    },
+    {
+      "source": "grf-crypto-mgr",
+      "target": "ro-patcher",
+      "type": "whole-grf-artifacts-for-file-replacement",
+      "automation": "manual-or-reviewed-transfer",
+      "note": "可将完整 GRF 制品加入新清单；不支持 GRF 内部合并"
+    },
+    {
+      "source": "casual-ro-website",
+      "target": "ro-patcher",
+      "type": "visual-reference-and-local-theme-assets",
+      "automation": "manual-copy",
+      "note": "官网插画本地复制，非运行时依赖或自动样式同步"
+    },
+    {
+      "source": "ro-docs",
+      "target": "ro-patcher",
+      "type": "thor-distribution-and-skin-reference",
+      "automation": "reference-only",
+      "note": "参考资料，不表示已支持旧皮肤或 .thor"
+    },
+    {
+      "source": "rea",
+      "target": "ro-patcher",
+      "type": "thor-artifact-analysis",
+      "automation": "analysis-tool-only",
+      "note": "非运行依赖；已有静态资源证据，函数反编译未完成"
+    },
+    {
+      "source": "ro-patcher",
+      "target": "cro-patch-grf",
+      "type": "external-resource-page-link",
+      "automation": "configured-browser-navigation",
+      "note": "下载介绍页，不表示已部署 JSON 清单托管服务"
+    },
+    {
+      "source": "ro-patcher",
+      "target": "casual-ro-website",
+      "type": "external-homepage-and-announcement-page-link",
+      "automation": "configured-browser-navigation"
+    },
+    {
+      "source": "ro-patcher",
+      "target": "ro-docs",
+      "type": "external-documentation-link",
+      "automation": "configured-browser-navigation"
     }
   ],
   "external_targets": [
@@ -167,6 +298,33 @@
       "name": "开发客户端安装目录",
       "type": "installation",
       "path": "R:\\RO\\02-开发中客户端\\CasualRO-2023"
+    },
+    {
+      "name": "2022 开发客户端安装目录",
+      "type": "installation",
+      "path": "R:\\RO\\02-开发中客户端\\CasualRO-2022",
+      "note": "历史 Thor 对照客户端；未由本次登陆器开发修改"
+    },
+    {
+      "name": "ro-patcher 独立安装目录",
+      "type": "proposed-installation",
+      "path": "<RO客户端>\\ro-patcher",
+      "source_repository": "ro-patcher",
+      "note": "建议部署位置；未确认已部署到真实客户端，配置及状态不跨客户端共享"
+    },
+    {
+      "name": "ro-patcher JSON 补丁与公告源",
+      "type": "operator-configured-http-service",
+      "source_repository": "ro-patcher",
+      "note": "模板 manifestUrl/feedUrl 为空；未验证在线托管，不等同于 grf.casualro.top"
+    }
+  ],
+  "worktrees": [
+    {
+      "repository": "casual-ro-server",
+      "path": "D:\\workspace\\Github\\casual-ro-server-custom-commands",
+      "branch_snapshot": "FEATURE-010-CustomCommands",
+      "role": "宏保护的自定义指令特性；killnear；与主工作区共用 Git 仓库"
     }
   ]
 }

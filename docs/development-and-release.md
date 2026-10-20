@@ -39,7 +39,7 @@ git branch --show-current
 
 最终开发客户端：`R:\RO\02-开发中客户端\CasualRO-2023`。这是安装目录，不是 Git 仓库。
 
-`ragexe-diff` 负责对原胚 EXE 打补丁。最终 EXE 放入客户端仓库的 `Ragexe/{打包版本}_CasualRO.exe`，`py/package.py` 选择它，发布时复制为 `_CasualRO.exe`。
+当前 EXE 补丁脚本适配工程是 `WarpEdition`；`ragexe-diff/diff/Warp` 保存原胚和会话资料，`ragexe-diff/assistant` 保存助手源码。四者与 Nemo、rea 的分工见 [客户端工具链](client-toolchain.md)。最终 EXE 放入客户端仓库的 `Ragexe/{打包版本}_CasualRO.exe`，`py/package.py` 选择它，发布时复制为 `_CasualRO.exe`。
 
 RO 助手的源码与构建入口在 `ragexe-diff/assistant`：
 
@@ -57,6 +57,16 @@ python py/package.py -y 20230817 -s 127.0.0.1 -k 0 -t "R:\RO\02-开发中客户�
 ```
 
 该命令重新生成补丁并覆盖目标目录；助手集成会保留目标现有 `ROAssistant.ini`。客户端 EXE 改动后必须同步服务端 MD5 白名单。服务端 PACKETVER 也必须与实际客户端协议适配，不以补丁文件名替代核对。
+
+## 玩家启动前的补丁更新
+
+`casual-ro-client-patch` 的装配发布与 `ro-patcher` 的运行时更新属于两段流程：前者准备客户端配置、EXE 和资源制品，后者从配置的清单地址下载已经发布的文件，并校验、安装、记录补丁编号后启动游戏。
+
+新登陆器由 `D:\workspace\Github\ro-patcher` 构建，完整目录包部署为客户端下的 `ro-patcher/`。`config.json`、`themes/`、`state/`、`cache/`、`backups/`、`logs/` 集中在此目录；源码仓库与客户端里的同名安装目录不是同一个位置。
+
+目前二者未自动接通：不能假定 `py/package.py` 会生成新登陆器的 JSON 清单，也不能直接将 `.thor` 交给它。准备好的客户端变更文件可手动交给 `ro-patcher/scripts/make-patch.cjs` 生成清单，再上传文件与清单；资源工程生成的完整 GRF 也可以这样替换，但不支持 GRF 内部增量合并。详细命令、基线和边界见 [登陆器与更新链](launcher-and-updates.md)。
+
+本次登陆器验证使用项目内演示客户端与替身游戏程序；不能据此标记 R: 下的真实客户端已完成安装或联服验收。
 
 ## GRF 的来源、构建与加载
 
