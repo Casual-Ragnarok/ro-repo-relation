@@ -1,0 +1,172 @@
+{
+  "verified_date": "2026-10-21",
+  "timezone": "Asia/Shanghai",
+  "scope": "Local checkout and workflow inspection; no online deployment verification",
+  "repositories": [
+    {
+      "name": "casual-ro-server",
+      "path": "D:\\workspace\\Github\\casual-ro-server",
+      "github": "https://github.com/Casual-Ragnarok/casual-ro-server",
+      "origin": "git@ro.github.com:Casual-Ragnarok/casual-ro-server.git",
+      "branch_snapshot": "codex/test-2023",
+      "role": "服务端源码与特性",
+      "kind": "source"
+    },
+    {
+      "name": "casual-ro-server-docker",
+      "path": "D:\\workspace\\Github\\casual-ro-server-docker",
+      "github": "https://github.com/Casual-Ragnarok/casual-ro-server-docker",
+      "origin": "git@ro.github.com:Casual-Ragnarok/casual-ro-server-docker.git",
+      "branch_snapshot": "testing",
+      "role": "Docker 部署、覆盖配置与生成工具",
+      "kind": "deployment"
+    },
+    {
+      "name": "casual-ro-client-patch",
+      "path": "D:\\workspace\\Github\\casual-ro-client-patch",
+      "github": "https://github.com/Casual-Ragnarok/casual-ro-client-patch",
+      "origin": "git@ro.github.com:Casual-Ragnarok/casual-ro-client-patch.git",
+      "branch_snapshot": "master",
+      "role": "客户端配置与补丁装配",
+      "kind": "packaging"
+    },
+    {
+      "name": "ragexe-diff",
+      "path": "D:\\workspace\\Github\\ragexe-diff",
+      "github": "https://github.com/Casual-Ragnarok/ragexe-diff",
+      "origin": "git@ro.github.com:Casual-Ragnarok/ragexe-diff.git",
+      "branch_snapshot": "main",
+      "role": "Ragexe 补丁和 RO 助手开发",
+      "kind": "source"
+    },
+    {
+      "name": "grf-crypto-mgr",
+      "path": "D:\\workspace\\Github\\grf-crypto-mgr",
+      "github": "https://github.com/Casual-Ragnarok/grf-crypto-mgr",
+      "origin": "git@ro.github.com:Casual-Ragnarok/grf-crypto-mgr.git",
+      "branch_snapshot": "main",
+      "role": "GRF 构建与资源管理",
+      "kind": "assets"
+    },
+    {
+      "name": "casual-ro-website",
+      "path": "D:\\workspace\\Github\\casual-ro-website",
+      "github": "https://github.com/Casual-Ragnarok/casual-ro-website",
+      "origin": "git@github.com:Casual-Ragnarok/casual-ro-website.git",
+      "branch_snapshot": "master",
+      "role": "官网",
+      "kind": "website"
+    },
+    {
+      "name": "casual-ro-feature-showcase",
+      "path": "D:\\workspace\\Github\\casual-ro-feature-showcase",
+      "github": "https://github.com/Casual-Ragnarok/casual-ro-feature-showcase",
+      "origin": "git@ro.github.com:Casual-Ragnarok/casual-ro-feature-showcase.git",
+      "branch_snapshot": "main",
+      "role": "特色介绍与公开图鉴",
+      "kind": "website"
+    },
+    {
+      "name": "ro-docs",
+      "path": "D:\\workspace\\Github\\ro-docs",
+      "github": "https://github.com/Casual-Ragnarok/ro-docs",
+      "origin": "git@ro.github.com:Casual-Ragnarok/ro-docs.git",
+      "branch_snapshot": "master",
+      "role": "文档资料站",
+      "kind": "website"
+    },
+    {
+      "name": "cro-patch-grf",
+      "path": "D:\\workspace\\Github\\cro-patch-grf",
+      "github": "https://github.com/Casual-Ragnarok/cro-patch-grf",
+      "origin": "git@ro.github.com:Casual-Ragnarok/cro-patch-grf.git",
+      "branch_snapshot": "master",
+      "role": "GRF 下载介绍页",
+      "kind": "website"
+    },
+    {
+      "name": "hexo-store",
+      "path": "D:\\workspace\\Github\\hexo-store",
+      "github": "https://github.com/Casual-Ragnarok/hexo-store",
+      "origin": "git@ro.github.com:Casual-Ragnarok/hexo-store.git",
+      "branch_snapshot": "master",
+      "role": "商城与 NPC 索引生成",
+      "kind": "generator"
+    },
+    {
+      "name": "ro-npcs",
+      "path": "D:\\workspace\\Github\\ro-npcs",
+      "github": "https://github.com/Casual-Ragnarok/ro-npcs",
+      "origin": "git@ro.github.com:Casual-Ragnarok/ro-npcs.git",
+      "branch_snapshot": "master",
+      "role": "NPC 索引发布副本",
+      "kind": "generated-site"
+    },
+    {
+      "name": "ro-repo-relation",
+      "path": "D:\\workspace\\Github\\ro-repo-relation",
+      "github": "https://github.com/Casual-Ragnarok/ro-repo-relation",
+      "origin": "git@github.com:Casual-Ragnarok/ro-repo-relation.git",
+      "branch_snapshot": "main",
+      "role": "仓库关系索引",
+      "kind": "documentation"
+    }
+  ],
+  "relations": [
+    {
+      "source": "casual-ro-server-docker",
+      "target": "casual-ro-server",
+      "type": "reviewed-config-migration",
+      "automation": "manual-or-reviewed-transfer"
+    },
+    {
+      "source": "ragexe-diff",
+      "target": "casual-ro-client-patch",
+      "type": "patched-exe-and-assistant-artifacts",
+      "automation": "manual-or-reviewed-transfer"
+    },
+    {
+      "source": "grf-crypto-mgr",
+      "target": "casual-ro-client-patch",
+      "type": "external-grf-release-coordination",
+      "automation": "manual-or-reviewed-transfer"
+    },
+    {
+      "source": "casual-ro-server-docker",
+      "target": "casual-ro-feature-showcase",
+      "type": "public-sanitized-data-and-watermarked-thumbnails",
+      "automation": "manual-or-reviewed-transfer"
+    },
+    {
+      "source": "hexo-store",
+      "target": "ro-npcs",
+      "type": "generate-and-publish-static-npc-index",
+      "automation": "workflow-dependent"
+    },
+    {
+      "source": "casual-ro-website",
+      "target": "casual-ro-feature-showcase",
+      "type": "navigation-link",
+      "automation": "manual-or-reviewed-transfer"
+    }
+  ],
+  "external_targets": [
+    {
+      "name": "RO-GRF",
+      "type": "resource-submodule",
+      "path": "D:\\workspace\\Github\\grf-crypto-mgr\\RO-GRF",
+      "remote": "git@hf.co:datasets/EXPM02/RO-GRF.git"
+    },
+    {
+      "name": "EHakker/ro-npcs",
+      "type": "alternate-npc-pages-target",
+      "github": "https://github.com/EHakker/ro-npcs",
+      "source_workflow": "hexo-store/.github/workflows/github_deploy_other.yml"
+    },
+    {
+      "name": "开发客户端安装目录",
+      "type": "installation",
+      "path": "R:\\RO\\02-开发中客户端\\CasualRO-2023"
+    }
+  ]
+}
