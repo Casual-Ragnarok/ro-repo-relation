@@ -6,6 +6,8 @@
 .cro-community-menu:hover .cro-community-panel,.cro-community-menu[open] .cro-community-panel,.cro-community-menu:focus-within .cro-community-panel{display:block}
 .cro-community-panel img{display:block;width:220px;height:220px;max-width:100%;border-radius:8px}
 .cro-community-panel p{font-size:12px;margin:9px 0 0;color:#927383}
+.cro-community-menu summary svg{width:23px!important;height:23px!important;min-width:0!important;flex-shrink:0}
+.cro-community-footer svg{display:inline-block;width:17px!important;height:17px!important;min-width:0!important}
 .cro-community-footer{box-sizing:border-box;max-width:1180px;margin:48px auto 24px;padding:30px 36px;border:1px solid #ecdbe4;border-radius:22px;background:#fff7fa;display:flex;justify-content:space-between;align-items:center;gap:30px;color:#795367;font-family:"Comic Sans MS","Microsoft YaHei",sans-serif}
 .cro-community-footer small{font-size:10px;letter-spacing:2px;color:#ad8199}.cro-community-footer h2{font-size:24px;margin:12px 0;background:none!important;color:#795367!important}.cro-community-footer p{font-size:14px;line-height:1.9;margin:10px 0}.cro-community-footer span{font-size:12px;color:#a68a9b}.cro-community-footer img{width:160px;height:160px;flex-shrink:0;border-radius:12px}
 @media(max-width:650px){.cro-community-menu summary span{display:none}.cro-community-menu summary{padding:8px}#cro-document-nav{gap:8px}.cro-community-footer{margin:28px 12px;padding:24px;flex-direction:column;text-align:center}.cro-community-footer h2{font-size:21px}}

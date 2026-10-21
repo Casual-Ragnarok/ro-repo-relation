@@ -2,7 +2,7 @@
 
 整理随缘仙境及相关 RO 项目的职责、资源流转和配套关系。
 
-**[查看交互关系图](https://casual-ragnarok.github.io/ro-repo-relation/)** · [离线页面](index.html) · [结构化数据](repos.json)
+**[查看交互关系图](https://repos.casualro.top/)** · [离线页面](index.html) · [结构化数据](repos.json)
 
 关系图支持功能搜索、分类筛选、上下游高亮和 SVG 导出。点击仓库可查看完整说明、源码地址、站点入口及关系依据。
 
@@ -41,7 +41,7 @@
 | [cro-patch-grf](https://github.com/Casual-Ragnarok/cro-patch-grf) · [站点](https://grf.casualro.top/) | 已加密 GRF 下载列表与加载指引 |
 | [hexo-store](https://github.com/Casual-Ragnarok/hexo-store) · [站点](https://store.casualro.top/) | Hexo NPC 脚本商城与索引生成 |
 | [ro-npcs](https://github.com/Casual-Ragnarok/ro-npcs) · [站点](https://npc.casualro.top/) | NPC 脚本清单静态发布副本 |
-| [ro-repo-relation](https://github.com/Casual-Ragnarok/ro-repo-relation) · [站点](https://casual-ragnarok.github.io/ro-repo-relation/) | RO 仓库职责、关系与流程索引 |
+| [ro-repo-relation](https://github.com/Casual-Ragnarok/ro-repo-relation) · [站点](https://repos.casualro.top/) | RO 仓库职责、关系与流程索引 |
 | [FluxCP](https://github.com/Casual-Ragnarok/FluxCP) | 面向 rAthena 的 PHP Web 控制面板 |
 | [ro-effects](https://github.com/Casual-Ragnarok/ro-effects) | RO 特效编号与演示清单 |
 | [ro-selfsys](https://github.com/Casual-Ragnarok/ro-selftrans) | RO 客户端文本自助翻译平台设计 |

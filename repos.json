@@ -352,10 +352,10 @@
         }
       ],
       "page": {
-        "url": "https://casual-ragnarok.github.io/ro-repo-relation/",
+        "url": "https://repos.casualro.top/",
         "label": "GitHub Pages",
-        "kind": "default-domain",
-        "source": "README.md",
+        "kind": "custom-domain",
+        "source": "GitHub Pages 自定义域名与公开重定向",
         "verified_date": "2026-10-21"
       }
     },

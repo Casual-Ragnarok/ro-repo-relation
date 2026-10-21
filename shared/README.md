@@ -7,8 +7,8 @@
 放在页面自己的样式、脚本之后：
 
 ```html
-<link rel="stylesheet" href="https://casual-ragnarok.github.io/ro-repo-relation/shared/site.css">
-<script defer data-site="docs" src="https://casual-ragnarok.github.io/ro-repo-relation/shared/site.js"></script>
+<link rel="stylesheet" href="https://repos.casualro.top/shared/site.css">
+<script defer data-site="docs" src="https://repos.casualro.top/shared/site.js"></script>
 ```
 
 `data-site` 支持 `docs`、`effects`、`features`、`downloads`、`npcs`、`clients`、`relations`。脚本统一创建页眉、二维码和页脚，并为反馈链接选择对应仓库和当前公开页面地址。
