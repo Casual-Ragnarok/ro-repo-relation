@@ -1,0 +1,27 @@
+/* Shared visual language with casualro.top; navigation remains available on every feature page. */
+:root{--ink:#634153;--forest:#c3688b;--muted:#927383;--paper:#fff9f7;--line:#f0e2e5;--lime:#f8dbe5;--white:#fffdfc;--orange:#aa456c;--display:"Comic Sans MS","Microsoft YaHei","PingFang SC",sans-serif;--body:var(--display)}
+body{background:radial-gradient(ellipse at 0 20%,#fceaf080,transparent 45%),radial-gradient(ellipse at 100% 60%,#ede5ff66,transparent 40%),#fff9f7}
+.site-header{max-width:none;margin:0;padding:0;display:block;background:#fffcfaed;border-bottom:1px solid #f0e2e5}
+.nav-wrap{max-width:1360px;min-height:90px;margin:auto;padding:16px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.site-header .brand{color:#795367;font-size:21px;letter-spacing:2px;gap:12px;white-space:nowrap;font-weight:750;line-height:1.6}
+.site-header .brand small{color:#b6899d;letter-spacing:2.4px;font-size:9px;margin:0}
+.brand-mark{display:grid;place-items:center;background:#f8dbe5;color:#bb6589;border:3px solid white;box-shadow:0 0 0 1px #efcdda,0 5px 10px #ae658015;border-radius:16px;font-size:30px;width:47px;height:47px;transform:rotate(-8deg)}
+.site-header nav{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.site-header nav a{display:block;border-radius:20px;font-size:13px;padding:10px 15px;color:#927383;white-space:nowrap;line-height:1.6}
+.site-header nav a:hover,.site-header nav a[aria-current]{background:#fce8ef;color:#aa456c}
+.site-header nav a[aria-current]{box-shadow:inset 0 0 0 1px #f6dce6}
+.nav-note{font-size:10px;color:#b08a9f;white-space:nowrap;font-style:italic}
+.hero{margin:36px auto 0;border:1px solid #f0dedc;border-radius:28px;background:#fff9f7;max-width:1280px}
+.hero h1{font-size:clamp(54px,6vw,84px);letter-spacing:-3px;color:#634153}.hero h1>span,.directory-heading h1 span{color:#c06087}
+.hero h1 small{color:#795367}.eyebrow{color:#b47d98}.status-dot{background:#c3688b}
+.button{background:#c3688b;border-color:#c3688b;border-radius:12px;box-shadow:0 5px 0 #a64e7012}.button:hover{background:#ad5276}
+.art-frame{border-radius:28px;background:#f8e7ef}.field-stamp{background:#fff9f7ed;box-shadow:0 8px 22px #ae658015}.field-stamp i{color:#bb6589}
+.manifesto{margin-top:45px}.habitats{background:#f9eef3}.habitat{background:#fffaf9;border-color:#eed6e1}.coast{background:#edf4f5}.volcano{background:#fcf0e9}.ruins{background:#f1edf7}
+.partner-tabs button{border-color:#eed6e1}.partner-panel{box-shadow:12px 12px 0 #f5e4ecec}.journey-list .step-number,.step-symbol{color:#b6899d}
+.rare{background:#f5e9f1;color:#634153;border:1px solid #ead6e3}.rare .eyebrow{color:#b47d98}.rare p:not(.eyebrow){color:#927383}.rare-labels span{border-color:#dcb8cf}.rare-orbit{border-color:#d6afc7}.rare-orbit>span{color:#c3688b;text-shadow:none}.rare-orbit:after{border-color:#d6afc7}
+.feature-cover{background:#fcf0f4;border-color:#eed6e1;border-radius:28px}.cover-label{background:#fff9f7ed}.feature-cover-copy h2{color:#795367}.site-footer{color:#795367}
+@media(max-width:1360px){.hero{margin-left:40px;margin-right:40px}}
+@media(max-width:1120px){.nav-note{display:none}}
+@media(max-width:900px){.nav-wrap{flex-wrap:wrap}.site-header nav{margin-left:auto}}
+@media(max-width:700px){.hero{margin:20px 22px 0;padding:29px 23px}.hero h1{font-size:64px}.partner-panel{box-shadow:7px 7px 0 #f5e4ecec}}
+@media(max-width:600px){.nav-wrap{padding:18px 20px 12px;gap:18px}.site-header .brand{font-size:20px}.brand-mark{width:40px;height:40px;font-size:26px}.site-header nav{gap:2px;width:100%;justify-content:space-between;margin:0}.site-header nav a{font-size:11px;padding:8px 9px}.hero{border-radius:22px}.hero h1{font-size:clamp(44px,12vw,64px)}}

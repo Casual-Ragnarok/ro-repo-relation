@@ -1,0 +1,15 @@
+@import url('./tokens.css');
+@import url('./fonts.css');
+@import url('./chrome.css');
+html:has(body.cro-theme){background:var(--paper)}
+body.cro-theme{background-color:var(--paper)!important;color:var(--ink)!important;font-family:var(--cro-font)!important}
+body.cro-theme :is(button,input,select,textarea){font-family:inherit}
+body.cro-theme :is(.card,.client-card,.resource,.table-shell){border-color:var(--line);border-radius:var(--radius)}
+body.cro-theme :is(.search,.search-wrap input,.toolbar select){border-color:var(--line);background:var(--surface);color:var(--ink)}
+body.cro-theme .cro-global-header{color:var(--ink)}
+body[data-page="relations"] .map{background-color:var(--surface);background-image:radial-gradient(var(--line) .8px,transparent .8px)}
+body[data-page="relations"] .node rect{fill:var(--surface);stroke:var(--line)}
+body[data-page="relations"] :is(.node:hover,.node:focus,.node.selected) rect{stroke:var(--accent)}
+body[data-page="relations"] .edge.hot{stroke:var(--accent)}
+body[data-page="relations"] .group-title{fill:var(--ink)}
+body[data-page="clients"] .filter.active{background:var(--accent);color:white}
