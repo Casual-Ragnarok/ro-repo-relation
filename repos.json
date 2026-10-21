@@ -589,7 +589,14 @@
           "path": "D:\\workspace\\Github\\ro-effects\\README.md",
           "note": "本地 README 功能说明"
         }
-      ]
+      ],
+      "page": {
+        "url": "https://effect.casualro.top/",
+        "label": "GitHub Pages",
+        "kind": "custom-domain",
+        "source": "ro-effects/CNAME 与 Pages 设置",
+        "verified_date": "2026-10-21"
+      }
     },
     {
       "name": "ro-selfsys",
