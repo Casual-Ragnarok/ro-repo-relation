@@ -9,7 +9,7 @@
       "github": "https://github.com/Casual-Ragnarok/casual-ro-server",
       "origin": "git@ro.github.com:Casual-Ragnarok/casual-ro-server.git",
       "branch_snapshot": "codex/test-2023",
-      "role": "服务端源码与特性",
+      "role": "Pandas 基础上的定制服务端与特性分支",
       "kind": "source",
       "branch_workflows": [
         {
@@ -26,6 +26,14 @@
           "branch": "codex/pre-renewal-bot-backup-20261017",
           "role": "迁移 master 前的历史分支，供回溯，不是当前 PRE 启动入口"
         }
+      ],
+      "description": "随缘仙境服务端源码；CasualRO/ 为定制引擎，Pandas 为上游子模块。维护特性分支、合并升级、编译和发布。",
+      "diagram_category": "服务端与数据",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-server\\README.md",
+          "note": "本地 README 功能说明"
+        }
       ]
     },
     {
@@ -34,8 +42,20 @@
       "github": "https://github.com/Casual-Ragnarok/casual-ro-server-docker",
       "origin": "git@ro.github.com:Casual-Ragnarok/casual-ro-server-docker.git",
       "branch_snapshot": "testing",
-      "role": "Docker 部署、覆盖配置与生成工具",
-      "kind": "deployment"
+      "role": "Pandas 服务端 Docker 构建、部署与配置",
+      "kind": "deployment",
+      "description": "以 Docker 编译、安装和运行 Pandas 服务端，配套数据库、Web 服务、自定义 NPC 与生成工具。当前 Dockerfile 拉取 PandasWS/Pandas，不能理解为自动构建 casual-ro-server 当前分支。",
+      "diagram_category": "服务端与数据",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-server-docker\\README.md",
+          "note": "本地 README 功能说明"
+        },
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-server-docker\\Dockerfile",
+          "note": "本地实现或配置佐证"
+        }
+      ]
     },
     {
       "name": "casual-ro-client-patch",
@@ -43,8 +63,24 @@
       "github": "https://github.com/Casual-Ragnarok/casual-ro-client-patch",
       "origin": "git@ro.github.com:Casual-Ragnarok/casual-ro-client-patch.git",
       "branch_snapshot": "master",
-      "role": "客户端配置与补丁装配",
-      "kind": "packaging"
+      "role": "随缘仙境登录补丁、配置与客户端装配",
+      "kind": "packaging",
+      "description": "覆盖到完整 kRO 客户端使用的补丁包，维护 data/System 配置、Ragexe、打包发布和适配版本的 RO 助手制品。README 中部分路径及版本沿用旧记录，当前脚本入口为 py/package.py。",
+      "diagram_category": "客户端与资源",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-client-patch\\README.md",
+          "note": "本地 README 功能说明"
+        },
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-client-patch\\Assistant\\README.md",
+          "note": "本地 README 功能说明"
+        },
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-client-patch\\GenLauncher.md",
+          "note": "本地实现或配置佐证"
+        }
+      ]
     },
     {
       "name": "ro-patcher",
@@ -52,7 +88,7 @@
       "github": "https://github.com/Casual-Ragnarok/ro-patcher",
       "origin": "git@ro.github.com:Casual-Ragnarok/ro-patcher.git",
       "branch_snapshot": "main",
-      "role": "Electron 游戏更新登陆器、主题、JSON 公告与补丁清单工具",
+      "role": "Electron 更新登陆器、公告与游戏启动",
       "kind": "launcher",
       "entry_points": [
         "src/main.cjs",
@@ -63,7 +99,15 @@
       ],
       "artifact": "dist/win-unpacked",
       "deployment_directory": "<RO客户端>/ro-patcher/",
-      "documentation": "docs/launcher-and-updates.md"
+      "documentation": "docs/launcher-and-updates.md",
+      "description": "支持主题切换、JSON 公告、补丁下载校验、文件替换及恢复日志。分发整个 Electron 目录包。尚未实现 .thor 解包、GRF 内部合并和自身升级；与 RO 助手是独立项目。",
+      "diagram_category": "客户端与资源",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ro-patcher\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ]
     },
     {
       "name": "ragexe-diff",
@@ -71,8 +115,20 @@
       "github": "https://github.com/Casual-Ragnarok/ragexe-diff",
       "origin": "git@ro.github.com:Casual-Ragnarok/ragexe-diff.git",
       "branch_snapshot": "main",
-      "role": "原胚、Diff 会话、封包密钥检查与 RO 助手源码",
-      "kind": "source"
+      "role": "Ragexe DIFF 教程、原胚与 RO 助手源码",
+      "kind": "source",
+      "description": "记录客户端 EXE 的 DIFF 方法、原胚和会话、封包密钥与最终 EXE MD5 核对；assistant/ 维护 ROAssistant DLL 和 Electron UI。助手仅对已适配原胚提供支持。",
+      "diagram_category": "客户端与资源",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ragexe-diff\\README.md",
+          "note": "本地 README 功能说明"
+        },
+        {
+          "path": "D:\\workspace\\Github\\ragexe-diff\\assistant\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ]
     },
     {
       "name": "grf-crypto-mgr",
@@ -80,8 +136,54 @@
       "github": "https://github.com/Casual-Ragnarok/grf-crypto-mgr",
       "origin": "git@ro.github.com:Casual-Ragnarok/grf-crypto-mgr.git",
       "branch_snapshot": "main",
-      "role": "GRF 构建与资源管理",
-      "kind": "assets"
+      "role": "GRF 加解密、内存提取与素材合包",
+      "kind": "assets",
+      "description": "通过 Playbook 编排密钥提取、GRF 加解密、文件表处理、运行时内存提取及专用恢复；auto_merge_grf.py 合并 RO-GRF 素材并可选加密。",
+      "diagram_category": "客户端与资源",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\grf-crypto-mgr\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ]
+    },
+    {
+      "name": "ro-grf-res",
+      "path": "D:\\workspace\\Github\\ro-grf-res",
+      "github": "https://github.com/Casual-Ragnarok/ro-grf-res",
+      "origin": "git@ro.github.com:Casual-Ragnarok/ro-grf-res.git",
+      "branch_snapshot": "main",
+      "source_commit": "676bca185165cefc2f098d56b48f10d152529f38",
+      "role": "GRF 素材分类与资源配置逆向推导",
+      "kind": "tool",
+      "documentation": "docs/grf-resource-analysis.md",
+      "entrypoints": [
+        "py/classify_grf.py",
+        "py/re_enname.py"
+      ],
+      "inputs": [
+        "res/raw/",
+        "libs/pokename.csv",
+        "py/conf/vars.py::EXIST_RES_DIR"
+      ],
+      "outputs": [
+        "res/out/client/",
+        "res/out/server/",
+        "res/exist/md5.txt"
+      ],
+      "note": "人工准备解包副本；分类会移动/删除文件；随机战斗数值和 TODO 仅为草稿；不直接读取/打包 GRF，不自动同步其他仓库",
+      "description": "README 定义为「RO GRF 图档资源配置逆向推导器」。分类、重复筛查及客户端/服务端配置草稿由脚本实现，输入为已解包素材；不直接解包或打包 GRF，草稿需要人工核对。",
+      "diagram_category": "客户端与资源",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ro-grf-res\\README.md",
+          "note": "本地 README 功能说明"
+        },
+        {
+          "path": "D:\\workspace\\Github\\ro-grf-res\\py\\classify_grf.py",
+          "note": "本地实现或配置佐证"
+        }
+      ]
     },
     {
       "name": "casual-ro-website",
@@ -89,8 +191,27 @@
       "github": "https://github.com/Casual-Ragnarok/casual-ro-website",
       "origin": "git@github.com:Casual-Ragnarok/casual-ro-website.git",
       "branch_snapshot": "master",
-      "role": "官网",
-      "kind": "website"
+      "role": "官网首页与商城、资料、补丁导航",
+      "kind": "website",
+      "description": "随缘仙境首页，汇集脚本商城、NPC 索引、开发资料、特色介绍和客户端补丁入口。原生 HTML/CSS/JS 构建并通过 Pages 发布。",
+      "diagram_category": "网站与内容",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-website\\README.md",
+          "note": "本地 README 功能说明"
+        },
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-website\\assets\\site.js",
+          "note": "本地实现或配置佐证"
+        }
+      ],
+      "page": {
+        "url": "https://casualro.top/",
+        "label": "GitHub Pages",
+        "kind": "custom-domain",
+        "source": "CNAME",
+        "verified_date": "2026-10-21"
+      }
     },
     {
       "name": "casual-ro-feature-showcase",
@@ -98,8 +219,23 @@
       "github": "https://github.com/Casual-Ragnarok/casual-ro-feature-showcase",
       "origin": "git@ro.github.com:Casual-Ragnarok/casual-ro-feature-showcase.git",
       "branch_snapshot": "main",
-      "role": "特色介绍与公开图鉴",
-      "kind": "website"
+      "role": "玩家向特色介绍与 PokeWorld 公开图鉴",
+      "kind": "website",
+      "description": "维护玩法介绍、前端交互、名称形态图鉴及获准展示的水印缩略图。不是服务端代码、战斗数据库或原始 GRF 资源仓库；README 保留默认 Pages 入口，线上已跳转至 feature.casualro.top 自定义域名。",
+      "diagram_category": "网站与内容",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-feature-showcase\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ],
+      "page": {
+        "url": "https://feature.casualro.top/",
+        "label": "GitHub Pages",
+        "kind": "custom-domain",
+        "source": "线上 Pages 重定向与 HTTPS 实测",
+        "verified_date": "2026-10-21"
+      }
     },
     {
       "name": "ro-docs",
@@ -107,8 +243,23 @@
       "github": "https://github.com/Casual-Ragnarok/ro-docs",
       "origin": "git@ro.github.com:Casual-Ragnarok/ro-docs.git",
       "branch_snapshot": "master",
-      "role": "文档资料站",
-      "kind": "website"
+      "role": "RO 开发运营资料与工具归档",
+      "kind": "website",
+      "description": "收录个人开发、运营 RO 时使用的资料和工具；部分资料为历史参考。实际站点内容主要位于 docs/；README 仍保留旧域名。",
+      "diagram_category": "网站与内容",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ro-docs\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ],
+      "page": {
+        "url": "https://docs.casualro.top/",
+        "label": "GitHub Pages",
+        "kind": "custom-domain",
+        "source": "docs/CNAME",
+        "verified_date": "2026-10-21"
+      }
     },
     {
       "name": "cro-patch-grf",
@@ -116,8 +267,23 @@
       "github": "https://github.com/Casual-Ragnarok/cro-patch-grf",
       "origin": "git@ro.github.com:Casual-Ragnarok/cro-patch-grf.git",
       "branch_snapshot": "master",
-      "role": "GRF 下载介绍页",
-      "kind": "website"
+      "role": "已加密 GRF 下载列表与加载指引",
+      "kind": "website",
+      "description": "面向玩家说明 GRF 手动下载、必须/可选补丁和 data.ini 加载顺序；页面提供下载入口，不负责 GRF 构建或 JSON 更新清单托管。",
+      "diagram_category": "网站与内容",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\cro-patch-grf\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ],
+      "page": {
+        "url": "https://grf.casualro.top/",
+        "label": "GitHub Pages",
+        "kind": "custom-domain",
+        "source": "CNAME",
+        "verified_date": "2026-10-21"
+      }
     },
     {
       "name": "hexo-store",
@@ -125,8 +291,24 @@
       "github": "https://github.com/Casual-Ragnarok/hexo-store",
       "origin": "git@ro.github.com:Casual-Ragnarok/hexo-store.git",
       "branch_snapshot": "master",
-      "role": "商城与 NPC 索引生成",
-      "kind": "generator"
+      "role": "Hexo NPC 脚本商城与索引生成",
+      "kind": "generator",
+      "description": "解析 NPC 模块 README 生成分类列表和商城文章，打包分发 NPC 模块，提供源码保护、淘宝目录转换及静态站点发布工具链。",
+      "diagram_category": "网站与内容",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\hexo-store\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ],
+      "page": {
+        "url": "https://store.casualro.top/",
+        "label": "商城发布站",
+        "kind": "custom-domain",
+        "source": "README.md",
+        "note": "商城源码生成后发布至 ro-store；不是 hexo-store 仓库自身的默认 Pages 地址。",
+        "verified_date": "2026-10-21"
+      }
     },
     {
       "name": "ro-npcs",
@@ -134,8 +316,24 @@
       "github": "https://github.com/Casual-Ragnarok/ro-npcs",
       "origin": "git@ro.github.com:Casual-Ragnarok/ro-npcs.git",
       "branch_snapshot": "master",
-      "role": "NPC 索引发布副本",
-      "kind": "generated-site"
+      "role": "NPC 脚本清单静态发布副本",
+      "kind": "generated-site",
+      "description": "随缘仙境 NPC 脚本索引。生成源和模板位于 hexo-store；本地仓库属于 Casual-Ragnarok，官网所用的另一发布目标为 EHakker/ro-npcs。",
+      "diagram_category": "网站与内容",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ro-npcs\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ],
+      "page": {
+        "url": "https://npc.casualro.top/",
+        "label": "NPC 索引发布站",
+        "kind": "custom-domain",
+        "source": "docs/CNAME",
+        "note": "官网所用发布目标为 EHakker/ro-npcs。",
+        "verified_date": "2026-10-21"
+      }
     },
     {
       "name": "ro-repo-relation",
@@ -143,8 +341,23 @@
       "github": "https://github.com/Casual-Ragnarok/ro-repo-relation",
       "origin": "git@github.com:Casual-Ragnarok/ro-repo-relation.git",
       "branch_snapshot": "main",
-      "role": "仓库关系索引",
-      "kind": "documentation"
+      "role": "RO 仓库职责、关系与流程索引",
+      "kind": "documentation",
+      "description": "维护 RO 相关仓库的职责、路径、协作关系和操作入口，并提供离线 HTML 关系图；不承载游戏代码或制品。",
+      "diagram_category": "网站与内容",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ro-repo-relation\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ],
+      "page": {
+        "url": "https://casual-ragnarok.github.io/ro-repo-relation/",
+        "label": "GitHub Pages",
+        "kind": "default-domain",
+        "source": "README.md",
+        "verified_date": "2026-10-21"
+      }
     },
     {
       "name": "WarpEdition",
@@ -152,8 +365,16 @@
       "github": "https://github.com/Casual-Ragnarok/WarpEdition",
       "origin": "git@ro.github.com:Casual-Ragnarok/WarpEdition.git",
       "branch_snapshot": "master",
-      "role": "Warp 补丁适配、逐原胚会话与支持矩阵",
-      "kind": "source"
+      "role": "RO 客户端 DIFF 工具与补丁脚本定制",
+      "kind": "source",
+      "description": "WARP 定制版，维护客户端补丁脚本、逐版本会话和支持说明。README 记录 2023–2025 原胚适配；ROAssistant 源码已迁至 ragexe-diff/assistant，本仓库保留 DLL 加载补丁。",
+      "diagram_category": "工具与外部目标",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\WarpEdition\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ]
     },
     {
       "name": "rea",
@@ -162,8 +383,24 @@
       "origin": "git@github.com:EXP-Tools/rea.git",
       "upstream": "https://github.com/morluto/rea.git",
       "branch_snapshot": "main",
-      "role": "二进制逆向分析工具",
-      "kind": "analysis-tool"
+      "role": "跨二进制、应用与运行时的逆向分析工具",
+      "kind": "analysis-tool",
+      "description": "通用 MCP 逆向分析工程，可分析原生二进制、JavaScript/Electron、.NET 和网站。RO 开发中作为分析辅助；其内部第三方工具不展开为 RO 仓库节点。",
+      "diagram_category": "工具与外部目标",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\rea\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ],
+      "page": {
+        "url": "https://rea.tools/",
+        "label": "上游项目官网",
+        "kind": "upstream",
+        "source": "README.md",
+        "note": "上游项目官网，不表示当前 fork 独立部署。",
+        "verified_date": "2026-10-21"
+      }
     },
     {
       "name": "Nemo",
@@ -171,8 +408,239 @@
       "gitlab": "https://gitlab.com/4144/Nemo",
       "origin": "https://gitlab.com/4144/Nemo.git",
       "branch_snapshot": "master",
-      "role": "另一套 Diff 工具与脚本参考",
-      "kind": "patch-tool"
+      "role": "RO 客户端 EXE 补丁工具",
+      "kind": "patch-tool",
+      "description": "通过补丁脚本修改闭源 RO 客户端，使其适配 Hercules 等模拟器。包含预设配置和补丁报告；本地位于 Gitlab/Nemo，而非 Github 目录。",
+      "diagram_category": "工具与外部目标",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Gitlab\\Nemo\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ]
+    },
+    {
+      "name": "casual-ro-AI-Bot",
+      "path": "D:\\workspace\\Github\\casual-ro-AI-Bot",
+      "github": "https://github.com/Casual-Ragnarok/casual-ro-AI-Bot",
+      "origin": "git@ro.github.com:Casual-Ragnarok/casual-ro-AI-Bot.git",
+      "branch_snapshot": "master",
+      "kind": "tool",
+      "role": "基于 OpenKore 的多账号 Bot 容器管理",
+      "description": "README 标题标注「AI 机器人（强化学习模型）」。已检查的 Python 脚本实际提供账号控制目录创建、配置与多账号容器连接/断开，使用 openkore-docker 镜像；不据标题宣称已实现强化学习训练。",
+      "diagram_category": "工具与外部目标",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-AI-Bot\\README.md",
+          "note": "本地 README 功能说明"
+        },
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-AI-Bot\\docker-compose.yml",
+          "note": "本地实现或配置佐证"
+        },
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-AI-Bot\\py\\03_connect_to_server.py",
+          "note": "本地实现或配置佐证"
+        }
+      ]
+    },
+    {
+      "name": "openkore-docker",
+      "path": "D:\\workspace\\Github\\openkore-docker",
+      "github": "https://github.com/Casual-Ragnarok/openkore-docker",
+      "origin": "git@ro.github.com:Casual-Ragnarok/openkore-docker.git",
+      "branch_snapshot": "master",
+      "kind": "tool",
+      "role": "OpenKore Docker 封装与运行配置",
+      "description": "封装 OpenKore、系统依赖与启动脚本，提供镜像构建、连接 RO 服务器及 control 行为策略配置。其源码子模块指向 OpenKore/openkore 上游。",
+      "diagram_category": "工具与外部目标",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\openkore-docker\\README.md",
+          "note": "本地 README 功能说明"
+        },
+        {
+          "path": "D:\\workspace\\Github\\openkore-docker\\.gitmodules",
+          "note": "本地实现或配置佐证"
+        }
+      ]
+    },
+    {
+      "name": "openkore",
+      "path": "D:\\workspace\\Github\\openkore",
+      "github": "https://github.com/Casual-Ragnarok/openkore",
+      "origin": "git@ro.github.com:Casual-Ragnarok/openkore.git",
+      "branch_snapshot": "casualro",
+      "kind": "tool",
+      "role": "跨平台 RO 自定义客户端与自动化助手",
+      "description": "OpenKore 的本地 fork；Perl 开发的 RO 自定义客户端与智能自动化助手，支持 Linux、Windows、macOS。本地 fork 不等于 openkore-docker 子模块的远端。",
+      "diagram_category": "工具与外部目标",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\openkore\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ]
+    },
+    {
+      "name": "GRFEditor",
+      "path": "D:\\workspace\\Github\\GRFEditor",
+      "github": "https://github.com/Casual-Ragnarok/GRFEditor",
+      "origin": "git@ro.github.com:Casual-Ragnarok/GRFEditor.git",
+      "branch_snapshot": "master",
+      "kind": "tool",
+      "role": "GRF / GPF / Thor 格式编辑器与库",
+      "description": "GRFEditor 的随缘仙境定制分支，提供 GRF/GPF/Thor 格式编辑及 GRF 库接口。README 来源为 Tokeiburu/GRFEditor；未据此假设与当前合包脚本存在自动调用。",
+      "diagram_category": "工具与外部目标",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\GRFEditor\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ]
+    },
+    {
+      "name": "FluxCP",
+      "path": "D:\\workspace\\Github\\FluxCP",
+      "github": "https://github.com/Casual-Ragnarok/FluxCP",
+      "origin": "git@ro.github.com:Casual-Ragnarok/FluxCP.git",
+      "branch_snapshot": "master",
+      "kind": "website",
+      "role": "面向 rAthena 的 PHP Web 控制面板",
+      "description": "Flux Control Panel，用于 rAthena 服务器的 Web 管理与玩家服务，包含新闻页面、工单、排名及日志等功能；属于 PHP/MySQL 应用，区别于静态官网。",
+      "diagram_category": "网站与内容",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\FluxCP\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ]
+    },
+    {
+      "name": "Gepard",
+      "path": "D:\\workspace\\Github\\Gepard",
+      "github": "https://github.com/Hypercall/Gepard",
+      "origin": "https://github.com/Hypercall/Gepard.git",
+      "branch_snapshot": "master",
+      "kind": "tool",
+      "role": "Gepard 反作弊绕过研究工程",
+      "description": "README 标题为 Gepard Bypass，描述对 Gepard 反作弊钩子与加载限制的绕过和封包观察。不是官方 Gepard 防护服务或本服已集成的防护组件。",
+      "diagram_category": "工具与外部目标",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\Gepard\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ]
+    },
+    {
+      "name": "ragnarok-clients",
+      "path": "D:\\workspace\\Github\\ragnarok-clients",
+      "github": "https://github.com/Casual-Ragnarok/ragnarok-clients",
+      "origin": "git@github.com:Casual-Ragnarok/ragnarok-clients.git",
+      "branch_snapshot": "main",
+      "kind": "assets",
+      "role": "历年 RO 客户端资源与下载来源索引",
+      "description": "按年份、地区与语言整理完整客户端资源、补丁状态和获取来源，包含随缘仙境简中版本。scripts/generate_pages.py 可生成静态目录站；仓库以资源索引为主要职责。",
+      "diagram_category": "客户端与资源",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ragnarok-clients\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ],
+      "page": {
+        "url": "https://casual-ragnarok.github.io/ragnarok-clients/",
+        "label": "GitHub Pages",
+        "kind": "default-domain",
+        "source": "README.md",
+        "verified_date": "2026-10-21"
+      }
+    },
+    {
+      "name": "RagnarokSDE",
+      "path": "D:\\workspace\\Github\\RagnarokSDE",
+      "github": "https://github.com/Casual-Ragnarok/RagnarokSDE",
+      "origin": "git@ro.github.com:Casual-Ragnarok/RagnarokSDE.git",
+      "branch_snapshot": "fix-def-encoding",
+      "kind": "tool",
+      "role": "RO 服务端数据库文件编辑器",
+      "description": "RagnarokSDE 的随缘仙境定制版，编辑 RO 服务端数据库文件，来源为 Tokeiburu/RagnarokSDE。未查到针对当前服务端分支的自动同步关系。",
+      "diagram_category": "工具与外部目标",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\RagnarokSDE\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ]
+    },
+    {
+      "name": "ro-effects",
+      "path": "D:\\workspace\\Github\\ro-effects",
+      "github": "https://github.com/Casual-Ragnarok/ro-effects",
+      "origin": "git@ro.github.com:Casual-Ragnarok/ro-effects.git",
+      "branch_snapshot": "master",
+      "kind": "website",
+      "role": "RO 特效编号与演示清单",
+      "description": "按特效 ID 区间维护 RO 特效演示列表（effects/list/）。职责为展示和查阅，不是特效运行引擎或自动生成 GRF 的资源管线。",
+      "diagram_category": "网站与内容",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ro-effects\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ]
+    },
+    {
+      "name": "ro-selfsys",
+      "path": "D:\\workspace\\Github\\ro-selfsys",
+      "github": "https://github.com/Casual-Ragnarok/ro-selftrans",
+      "origin": "git@ro.github.com:Casual-Ragnarok/ro-selftrans.git",
+      "branch_snapshot": "master",
+      "kind": "website",
+      "role": "RO 客户端文本自助翻译平台设计",
+      "description": "本地目录名 ro-selfsys；README 标题和 origin 均为 ro-selftrans。README 描述若依框架、GPT 翻译、异步队列及简繁转换的设计思路，不能当作已完成能力清单。",
+      "diagram_category": "网站与内容",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ro-selfsys\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ]
+    },
+    {
+      "name": "ro-single-client",
+      "path": "D:\\workspace\\Github\\ro-single-client",
+      "github": "https://github.com/Casual-Ragnarok/ro-single-client",
+      "origin": "git@ro.github.com:Casual-Ragnarok/ro-single-client.git",
+      "branch_snapshot": "master",
+      "kind": "assets",
+      "role": "旧单机版客户端登录与汉化补丁",
+      "description": "与 ro-single-server 配套的旧单机客户端补丁，README 要求覆盖到 Ragnarok_KRO_20190306_Lite；可通过 sclientinfo.xml 指向联网服务器。属于独立历史链。",
+      "diagram_category": "客户端与资源",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ro-single-client\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ]
+    },
+    {
+      "name": "ro-single-server",
+      "path": "D:\\workspace\\Github\\ro-single-server",
+      "github": "https://github.com/Casual-Ragnarok/ro-single-server",
+      "origin": "git@ro.github.com:Casual-Ragnarok/ro-single-server.git",
+      "branch_snapshot": "master",
+      "kind": "source",
+      "role": "eAthena 系旧单机服务端整合包",
+      "description": "历史 RO 单机版服务端，README 描述基于 eAthena 的整合版本，支持本机与联网部署；与 ro-single-client 配套，不等同于当前 Pandas/CasualRO 源码链。",
+      "diagram_category": "服务端与数据",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ro-single-server\\README.md",
+          "note": "本地 README 功能说明"
+        }
+      ]
     }
   ],
   "relations": [
@@ -180,181 +648,519 @@
       "source": "casual-ro-server-docker",
       "target": "casual-ro-server",
       "type": "reviewed-config-migration",
-      "automation": "manual-or-reviewed-transfer"
+      "automation": "manual-or-reviewed-transfer",
+      "diagram": true,
+      "label": "审核后迁移配置与生成数据",
+      "mode": "manual",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ro-repo-relation\\docs\\development-and-release.md"
+        }
+      ],
+      "note": "配置协作；Dockerfile 当前拉取 PandasWS/Pandas，不自动构建当前 CasualRO 工作区。"
     },
     {
       "source": "grf-crypto-mgr",
       "target": "casual-ro-client-patch",
       "type": "external-grf-release-coordination",
-      "automation": "manual-or-reviewed-transfer"
+      "automation": "manual-or-reviewed-transfer",
+      "diagram": true,
+      "label": "GRF 与客户端补丁协调发布",
+      "mode": "manual",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ro-repo-relation\\docs\\development-and-release.md"
+        }
+      ]
     },
     {
       "source": "casual-ro-server-docker",
       "target": "casual-ro-feature-showcase",
       "type": "public-sanitized-data-and-watermarked-thumbnails",
-      "automation": "manual-or-reviewed-transfer"
+      "automation": "manual-or-reviewed-transfer",
+      "diagram": true,
+      "label": "公开图鉴与水印缩略图导出",
+      "mode": "manual",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ro-repo-relation/docs/development-and-release.md"
+        },
+        {
+          "path": "D:/workspace/Github/casual-ro-feature-showcase/README.md"
+        }
+      ]
     },
     {
       "source": "hexo-store",
       "target": "ro-npcs",
       "type": "generate-and-publish-static-npc-index",
-      "automation": "workflow-dependent"
+      "automation": "workflow-dependent",
+      "diagram": true,
+      "label": "生成并发布 NPC 脚本索引",
+      "mode": "artifact",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\hexo-store\\README.md"
+        },
+        {
+          "path": "D:\\workspace\\Github\\ro-repo-relation\\docs\\websites.md"
+        }
+      ],
+      "note": "本地 ro-npcs 与官网所用 EHakker/ro-npcs 发布目标须区分。"
     },
     {
       "source": "casual-ro-website",
       "target": "casual-ro-feature-showcase",
       "type": "navigation-link",
-      "automation": "manual-or-reviewed-transfer"
+      "automation": "manual-or-reviewed-transfer",
+      "diagram": true,
+      "label": "网站导航",
+      "mode": "navigation",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-website\\README.md"
+        },
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-website\\assets\\site.js"
+        }
+      ],
+      "note": "网站入口关联，不表示构建依赖。"
     },
     {
       "source": "ragexe-diff",
       "target": "WarpEdition",
       "type": "original-executables-and-session-reference",
-      "automation": "manual-or-reviewed-transfer"
+      "automation": "manual-or-reviewed-transfer",
+      "diagram": true,
+      "label": "原胚与逐版本会话输入",
+      "mode": "manual",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\WarpEdition\\Sessions\\Clients\\README.md"
+        },
+        {
+          "path": "D:\\workspace\\Github\\ro-repo-relation\\docs\\client-toolchain.md"
+        }
+      ]
     },
     {
       "source": "Nemo",
       "target": "WarpEdition",
       "type": "patch-implementation-reference",
-      "automation": "manual-or-reviewed-transfer"
+      "automation": "manual-or-reviewed-transfer",
+      "diagram": false
     },
     {
       "source": "rea",
       "target": "WarpEdition",
       "type": "binary-analysis-and-validation",
-      "automation": "manual-or-reviewed-transfer"
+      "automation": "manual-or-reviewed-transfer",
+      "diagram": false
     },
     {
       "source": "WarpEdition",
       "target": "casual-ro-client-patch",
       "type": "patched-executable-artifacts",
-      "automation": "manual-or-reviewed-transfer"
+      "automation": "manual-or-reviewed-transfer",
+      "diagram": true,
+      "label": "补丁后的 Ragexe EXE",
+      "mode": "manual",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ro-repo-relation\\docs\\client-toolchain.md"
+        }
+      ]
     },
     {
       "source": "ragexe-diff",
       "target": "casual-ro-client-patch",
       "type": "assistant-dll-and-electron-artifacts",
-      "automation": "manual-or-reviewed-transfer"
+      "automation": "manual-or-reviewed-transfer",
+      "diagram": true,
+      "label": "RO 助手 DLL / Electron 制品",
+      "mode": "manual",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-client-patch\\Assistant\\README.md"
+        }
+      ]
     },
     {
       "source": "ragexe-diff",
       "target": "casual-ro-server",
       "type": "final-exe-key-and-md5-verification",
-      "automation": "manual-or-reviewed-transfer"
+      "automation": "manual-or-reviewed-transfer",
+      "diagram": false
     },
     {
       "source": "casual-ro-client-patch",
       "target": "ro-patcher",
       "type": "release-files-for-json-manifest",
       "automation": "not-integrated-manual-preparation",
-      "note": "制品衔接方向；package.py 尚未自动生成新登陆器清单"
+      "note": "制品衔接方向；package.py 尚未自动生成新登陆器清单。",
+      "diagram": true,
+      "label": "手工准备文件与 JSON 清单",
+      "mode": "manual",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ro-repo-relation\\docs\\launcher-and-updates.md"
+        }
+      ]
     },
     {
       "source": "grf-crypto-mgr",
       "target": "ro-patcher",
       "type": "whole-grf-artifacts-for-file-replacement",
       "automation": "manual-or-reviewed-transfer",
-      "note": "可将完整 GRF 制品加入新清单；不支持 GRF 内部合并"
+      "note": "可将完整 GRF 制品加入新清单；不支持 GRF 内部合并",
+      "diagram": false
     },
     {
       "source": "casual-ro-website",
       "target": "ro-patcher",
       "type": "visual-reference-and-local-theme-assets",
       "automation": "manual-copy",
-      "note": "官网插画本地复制，非运行时依赖或自动样式同步"
+      "note": "官网插画本地复制，非运行时依赖或自动样式同步",
+      "diagram": false
     },
     {
       "source": "ro-docs",
       "target": "ro-patcher",
       "type": "thor-distribution-and-skin-reference",
       "automation": "reference-only",
-      "note": "参考资料，不表示已支持旧皮肤或 .thor"
+      "note": "参考资料，不表示已支持旧皮肤或 .thor",
+      "diagram": false
     },
     {
       "source": "rea",
       "target": "ro-patcher",
       "type": "thor-artifact-analysis",
       "automation": "analysis-tool-only",
-      "note": "非运行依赖；已有静态资源证据，函数反编译未完成"
+      "note": "非运行依赖；已有静态资源证据，函数反编译未完成",
+      "diagram": false
     },
     {
       "source": "ro-patcher",
       "target": "cro-patch-grf",
       "type": "external-resource-page-link",
       "automation": "configured-browser-navigation",
-      "note": "下载介绍页，不表示已部署 JSON 清单托管服务"
+      "note": "下载介绍页，不表示已部署 JSON 清单托管服务",
+      "diagram": false
     },
     {
       "source": "ro-patcher",
       "target": "casual-ro-website",
       "type": "external-homepage-and-announcement-page-link",
-      "automation": "configured-browser-navigation"
+      "automation": "configured-browser-navigation",
+      "diagram": false
     },
     {
       "source": "ro-patcher",
       "target": "ro-docs",
       "type": "external-documentation-link",
-      "automation": "configured-browser-navigation"
+      "automation": "configured-browser-navigation",
+      "diagram": false
     },
     {
       "source": "Cherry_Blossom_Bride_FullClient_2004",
       "target": "2004 樱之花嫁安装目录",
       "type": "legacy-client-reference-and-patch-tools",
-      "automation": "manual-installation-and-verification"
+      "automation": "manual-installation-and-verification",
+      "diagram": false
     },
     {
       "source": "rea",
       "target": "Cherry_Blossom_Bride_FullClient_2004",
       "type": "legacy-binary-analysis-evidence",
-      "automation": "analysis-tool-only"
+      "automation": "analysis-tool-only",
+      "diagram": false
     },
     {
       "source": "Nemo",
       "target": "Cherry_Blossom_Bride_FullClient_2004",
       "type": "legacy-patch-implementation-reference",
-      "automation": "reference-only"
+      "automation": "reference-only",
+      "diagram": false
     },
     {
       "source": "dgVoodoo2",
       "target": "2004 樱之花嫁安装目录",
       "type": "directx7-graphics-runtime",
-      "automation": "manual-release-artifact-copy"
+      "automation": "manual-release-artifact-copy",
+      "diagram": false
     },
     {
       "source": "casual-ro-server",
       "target": "2004 樱之花嫁安装目录",
       "type": "legacy-login-character-map-protocol-contract",
-      "automation": "branch-specific-build-and-runtime"
+      "automation": "branch-specific-build-and-runtime",
+      "diagram": false
     },
     {
       "source": "rea",
       "target": "REA/jadx-headless-mcp",
       "type": "git-submodule",
-      "automation": "explicit-submodule-checkout"
+      "automation": "explicit-submodule-checkout",
+      "diagram": false
     },
     {
       "source": "rea",
       "target": "REA/binwalk",
       "type": "git-submodule",
-      "automation": "explicit-submodule-checkout"
+      "automation": "explicit-submodule-checkout",
+      "diagram": false
     },
     {
       "source": "rea",
       "target": "REA/unblob",
       "type": "git-submodule",
-      "automation": "explicit-submodule-checkout"
+      "automation": "explicit-submodule-checkout",
+      "diagram": false
     },
     {
       "source": "rea",
       "target": "REA/ghidra-nativeaot",
       "type": "git-submodule",
-      "automation": "explicit-submodule-checkout"
+      "automation": "explicit-submodule-checkout",
+      "diagram": false
     },
     {
       "source": "rea",
       "target": "REA/wakaru",
       "type": "git-submodule",
-      "automation": "explicit-submodule-checkout"
+      "automation": "explicit-submodule-checkout",
+      "diagram": false
+    },
+    {
+      "source": "ro-grf-res",
+      "target": "grf-crypto-mgr",
+      "type": "reviewed-classified-resource-import",
+      "automation": "manual-or-reviewed-transfer",
+      "note": "分类素材经人工审核后交资源工程；不是现有自动调用依赖",
+      "diagram": true,
+      "label": "审核后的分类素材",
+      "mode": "manual",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ro-repo-relation\\docs\\grf-resource-analysis.md"
+        }
+      ]
+    },
+    {
+      "source": "ro-grf-res",
+      "target": "casual-ro-client-patch",
+      "type": "generated-client-config-drafts",
+      "automation": "manual-or-reviewed-transfer",
+      "note": "iteminfo、外观池、宠物表等草稿；须核对已有 ID 和资源名",
+      "diagram": true,
+      "label": "客户端配置草稿迁移",
+      "mode": "manual",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ro-repo-relation\\docs\\grf-resource-analysis.md"
+        }
+      ]
+    },
+    {
+      "source": "ro-grf-res",
+      "target": "casual-ro-server",
+      "type": "generated-db-and-npc-drafts",
+      "automation": "manual-or-reviewed-transfer",
+      "note": "数据库/商店/召唤脚本草稿；随机占位战斗数值不能覆盖当前平衡配置",
+      "diagram": true,
+      "label": "服务端 DB / NPC 草稿迁移",
+      "mode": "manual",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ro-repo-relation\\docs\\grf-resource-analysis.md"
+        }
+      ]
+    },
+    {
+      "source": "casual-ro-server-docker",
+      "target": "casual-ro-client-patch",
+      "type": "contract",
+      "automation": "contract",
+      "label": "配套服务端与客户端补丁",
+      "mode": "contract",
+      "diagram": true,
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-server-docker\\README.md"
+        },
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-client-patch\\README.md"
+        }
+      ]
+    },
+    {
+      "source": "RO-GRF",
+      "target": "grf-crypto-mgr",
+      "type": "dependency",
+      "automation": "dependency",
+      "label": "资源子模块 → 素材合包",
+      "mode": "dependency",
+      "diagram": true,
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\grf-crypto-mgr\\.gitmodules"
+        },
+        {
+          "path": "D:\\workspace\\Github\\grf-crypto-mgr\\README.md"
+        }
+      ]
+    },
+    {
+      "source": "Nemo",
+      "target": "ragexe-diff",
+      "type": "reference",
+      "automation": "reference",
+      "label": "DIFF 教程所用的补丁工具",
+      "mode": "reference",
+      "diagram": true,
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ragexe-diff\\README.md"
+        }
+      ]
+    },
+    {
+      "source": "casual-ro-server",
+      "target": "casual-ro-client-patch",
+      "type": "contract",
+      "automation": "contract",
+      "label": "封包版本与数据 ID 契约",
+      "mode": "contract",
+      "diagram": true,
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ro-repo-relation\\docs\\development-and-release.md"
+        }
+      ]
+    },
+    {
+      "source": "casual-ro-website",
+      "target": "ro-docs",
+      "type": "navigation",
+      "automation": "navigation",
+      "label": "网站导航",
+      "mode": "navigation",
+      "diagram": true,
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-website\\README.md"
+        },
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-website\\assets\\site.js"
+        }
+      ],
+      "note": "网站入口关联，不表示构建依赖。"
+    },
+    {
+      "source": "casual-ro-website",
+      "target": "cro-patch-grf",
+      "type": "navigation",
+      "automation": "navigation",
+      "label": "网站导航",
+      "mode": "navigation",
+      "diagram": true,
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-website\\README.md"
+        },
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-website\\assets\\site.js"
+        }
+      ],
+      "note": "网站入口关联，不表示构建依赖。"
+    },
+    {
+      "source": "casual-ro-website",
+      "target": "ro-npcs",
+      "type": "navigation",
+      "automation": "navigation",
+      "label": "网站导航",
+      "mode": "navigation",
+      "diagram": true,
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-website\\README.md"
+        },
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-website\\assets\\site.js"
+        }
+      ],
+      "note": "网站入口关联，不表示构建依赖。"
+    },
+    {
+      "source": "casual-ro-website",
+      "target": "hexo-store",
+      "type": "navigation",
+      "automation": "navigation",
+      "label": "导航至脚本商城发布站",
+      "mode": "navigation",
+      "diagram": true,
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-website\\README.md"
+        },
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-website\\assets\\site.js"
+        }
+      ],
+      "note": "商城源码为 hexo-store；官网导航链接指向生成后的商城发布站。"
+    },
+    {
+      "source": "openkore",
+      "target": "openkore-docker",
+      "type": "dependency",
+      "automation": "dependency",
+      "label": "封装 OpenKore 上游源码",
+      "mode": "dependency",
+      "diagram": true,
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\openkore-docker\\README.md"
+        },
+        {
+          "path": "D:\\workspace\\Github\\openkore-docker\\.gitmodules"
+        }
+      ],
+      "note": "表示同一 OpenKore 项目；Docker 子模块远端为 OpenKore/openkore，不是本地 Casual-Ragnarok fork。"
+    },
+    {
+      "source": "openkore-docker",
+      "target": "casual-ro-AI-Bot",
+      "type": "dependency",
+      "automation": "dependency",
+      "label": "提供多账号运行所用镜像",
+      "mode": "dependency",
+      "diagram": true,
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-AI-Bot\\docker-compose.yml"
+        },
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-AI-Bot\\py\\03_connect_to_server.py"
+        }
+      ]
+    },
+    {
+      "source": "ro-single-server",
+      "target": "ro-single-client",
+      "type": "contract",
+      "automation": "contract",
+      "label": "历史单机版配套服务端与补丁",
+      "mode": "contract",
+      "diagram": true,
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\ro-single-server\\README.md"
+        },
+        {
+          "path": "D:\\workspace\\Github\\ro-single-client\\README.md"
+        }
+      ]
     }
   ],
   "external_targets": [
@@ -362,7 +1168,17 @@
       "name": "RO-GRF",
       "type": "resource-submodule",
       "path": "D:\\workspace\\Github\\grf-crypto-mgr\\RO-GRF",
-      "remote": "git@hf.co:datasets/EXPM02/RO-GRF.git"
+      "remote": "git@hf.co:datasets/EXPM02/RO-GRF.git",
+      "diagram_category": "客户端与资源",
+      "role": "GRF 图档与客户端素材资源仓库",
+      "description": "Hugging Face 数据集 Git 仓库，以子模块形式供 grf-crypto-mgr 使用，收录随缘仙境图档、系列素材、界面/地图补丁与调色板。",
+      "url": "https://huggingface.co/datasets/EXPM02/RO-GRF",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\grf-crypto-mgr\\RO-GRF\\README.md",
+          "note": "明确提供给 grf-crypto-mgr 使用"
+        }
+      ]
     },
     {
       "name": "EHakker/ro-npcs",
@@ -468,5 +1284,24 @@
       "branch_snapshot": "FEATURE-010-CustomCommands",
       "role": "宏保护的自定义指令特性；killnear；与主工作区共用 Git 仓库"
     }
-  ]
+  ],
+  "diagram_categories": [
+    {
+      "name": "服务端与数据",
+      "color": "#407c78"
+    },
+    {
+      "name": "客户端与资源",
+      "color": "#2767b0"
+    },
+    {
+      "name": "网站与内容",
+      "color": "#8869a6"
+    },
+    {
+      "name": "工具与外部目标",
+      "color": "#ad7840"
+    }
+  ],
+  "diagram_scope": "RO 仓库与 RO-GRF 资源仓库；排除安装目录、外部运行组件、REA 内部子模块和仅因单次开发产生的视觉或分析参考。"
 }

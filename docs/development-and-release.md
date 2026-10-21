@@ -70,6 +70,8 @@ python py/package.py -y 20230817 -s 127.0.0.1 -k 0 -t "R:\RO\02-开发中客户�
 
 ## GRF 的来源、构建与加载
 
+已解包资源的分类和配置草稿推导使用独立工具仓库 `ro-grf-res`，详见 [资源分类与配置推导](grf-resource-analysis.md)。它处理 `res/raw/` 中的副本，会移动或删除部分文件；审核后的素材交资源工程、配置片段交客户端或服务端，不能将它的随机 DB 草稿直接当作正式平衡。
+
 `grf-crypto-mgr/RO-GRF` 是资源子模块，远程为 Hugging Face 数据集 `EXPM02/RO-GRF`，不是另一个同名 GitHub 代码仓库。GRF 工具代码和大型资源的版本管理、获取权限需要分别检查。
 
 本轮口袋妖怪资源目录：`D:\workspace\Github\grf-crypto-mgr\RO-GRF\series\byGameAnime`。

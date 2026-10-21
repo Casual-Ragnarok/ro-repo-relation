@@ -1,8 +1,16 @@
 # 随缘仙境仓库关系索引
 
+交互关系图：[打开 RO 仓库关联关系图](index.html)。可离线打开，支持按功能查看、搜索仓库、点击查看上下游及导出 SVG。修改 `repos.json` 后运行 `node scripts/build-map.mjs`，重新生成页面内嵌数据，无需安装依赖。
+
+线上入口：[RO 仓库关联关系图](https://casual-ragnarok.github.io/ro-repo-relation/)。资料卡使用远端仓库与文档链接；存在站点时显示站点地址，优先采用已核对的自定义域名。`repos.json` 的 `page` 保存站点信息；翻译平台等未确认站点的项目不猜测地址。HTML 内嵌数据不包含本机绝对路径。
+
+GitHub Pages 使用 `.github/workflows/pages.yml` 从 `main` 构建和部署，仅上传生成后的 `index.html`；首次发布需在仓库 Settings → Pages 将 Source 设为 GitHub Actions。
+
+图中收录 29 个本地项目和 RO-GRF 资源仓库，功能说明以各仓库 README 为主，必要时查阅源码或配置。`diagram_category` 指定图中分类，`relations[].diagram: true` 指定展示的关系，每个节点与连线都附 `evidence`。安装目录、外部运行组件、REA 内部子模块及一次性的皮肤/插画参考不进入图中；`repos.json` 仍保留这些流程上下文，但不作为图中的仓库关联。
+
 记录日期：2026-10-21（Asia/Shanghai）。范围是本次开发对话实际涉及的仓库和本机路径，不是所有 RO 项目的完整清单。仓库路径、origin、当前分支及关键脚本已从本机核对；网站地址是项目约定入口，本次没有联网验证 DNS、线上内容或 Pages 设置。
 
-需要改东西时，先看下面的定位表，再查 [开发与发布流程](docs/development-and-release.md) 或 [网站与 NPC 索引](docs/websites.md)、[Warp、助手与逆向工具链](docs/client-toolchain.md)、[登陆器、主题与补丁更新](docs/launcher-and-updates.md)。可供工具读取的路径和关系见 [repos.json](repos.json)。
+需要改东西时，先看下面的定位表，再查 [开发与发布流程](docs/development-and-release.md) 或 [网站与 NPC 索引](docs/websites.md)、[Warp、助手与逆向工具链](docs/client-toolchain.md)、[登陆器、主题与补丁更新](docs/launcher-and-updates.md)。GRF 解包资源的分类与配置草稿生成见 [资源分类工具](docs/grf-resource-analysis.md)。可供工具读取的路径和关系见 [repos.json](repos.json)。
 
 ## 仓库速查
 
@@ -18,44 +26,95 @@
 |[WarpEdition](https://github.com/Casual-Ragnarok/WarpEdition)|当前 Warp 补丁脚本适配、逐原胚测试和支持矩阵|`Scripts/`、`Patches/`、`Sessions/Clients/`、`Docs/Patch-Support/`|
 |[rea](https://github.com/EXP-Tools/rea)|分析 EXE 的逆向工具工程；辅助定位和验证补丁|上游 `morluto/rea`；不是 RO 客户端或助手运行依赖|
 |[Nemo](https://gitlab.com/4144/Nemo)|另一套 Diff 工具和补丁脚本参考|本地 `D:\workspace\Gitlab\Nemo`；`Patches/`、`NEMO.exe`|
-|[grf-crypto-mgr](https://github.com/Casual-Ragnarok/grf-crypto-mgr)|GRF 图档整理、合并、加密与资源构建|`auto_merge_grf.py`；`RO-GRF/` 资源子模块|
+|[grf-crypto-mgr](https://github.com/Casual-Ragnarok/grf-crypto-mgr)|GRF 加解密、文件表处理、运行时内存提取和素材合包|`run_playbook.py`、`auto_merge_grf.py`；`RO-GRF/` 资源子模块|
+|[ro-grf-res](https://github.com/Casual-Ragnarok/ro-grf-res)|已解包 GRF 素材分类、重复筛查及客户端/服务端配置草稿推导|`py/classify_grf.py`；输入 `res/raw/`，输出 `res/out/`；需人工审核迁移|
 |[casual-ro-website](https://github.com/Casual-Ragnarok/casual-ro-website)|官网首页与导航入口|`casualro.top`，`tools/build.mjs`|
-|[casual-ro-feature-showcase](https://github.com/Casual-Ragnarok/casual-ro-feature-showcase)|玩家向特色介绍、PokeWorld 玩法介绍及图鉴|`feature.casualro.top`；`pokeworld/`、`pokeworld/pokedex/`|
+|[casual-ro-feature-showcase](https://github.com/Casual-Ragnarok/casual-ro-feature-showcase)|玩家向特色介绍、PokeWorld 玩法介绍及公开名称形态图鉴|README 使用 GitHub Pages 默认入口；`pokeworld/`、`pokeworld/pokedex/`；不存储战斗数据库或原始 GRF|
 |[ro-docs](https://github.com/Casual-Ragnarok/ro-docs)|文档、资料与工具目录|`docs.casualro.top`，有效站点内容主要在 `docs/`|
 |[cro-patch-grf](https://github.com/Casual-Ragnarok/cro-patch-grf)|玩家访问的 GRF/客户端补丁下载说明页|`grf.casualro.top`，不等同于 GRF 资源构建工程|
 |[hexo-store](https://github.com/Casual-Ragnarok/hexo-store)|商城内容、NPC 模块资料与 NPC 索引生成|`py/gen_npc_list.py`、`tpl/summary/html/`、Hexo 发布流程|
 |[ro-npcs](https://github.com/Casual-Ragnarok/ro-npcs)|NPC 索引的静态发布副本|本地 origin 指向 Casual-Ragnarok；实际已使用的另一发布目标是 [EHakker/ro-npcs](https://github.com/EHakker/ro-npcs)，详见网站文档|
 |[ro-repo-relation](https://github.com/Casual-Ragnarok/ro-repo-relation)|本索引：记录仓库职责、依赖和操作入口|本仓库不承载游戏代码或发布制品|
+|[casual-ro-AI-Bot](https://github.com/Casual-Ragnarok/casual-ro-AI-Bot)|现有实现为 OpenKore 多账号配置与容器连接管理|README 标注强化学习；已检查脚本不据此认定训练功能已实现|
+|[openkore-docker](https://github.com/Casual-Ragnarok/openkore-docker)|OpenKore 镜像构建、依赖封装、连接与行为配置|`openkore/` 子模块远端为 `OpenKore/openkore`|
+|[openkore](https://github.com/Casual-Ragnarok/openkore)|跨平台 RO 自定义客户端与自动化助手的本地 fork|`openkore.pl`；不能当作 Docker 子模块指向的 fork|
+|[GRFEditor](https://github.com/Casual-Ragnarok/GRFEditor)|GRF/GPF/Thor 格式编辑器与 GRF 库|随缘仙境定制分支，来源 `Tokeiburu/GRFEditor`|
+|[FluxCP](https://github.com/Casual-Ragnarok/FluxCP)|rAthena 的 PHP Web 控制面板与玩家服务|含新闻、工单、排名及日志等功能；区别于静态官网|
+|[Gepard](https://github.com/Hypercall/Gepard)|Gepard Bypass 反作弊绕过研究|不是官方防护工程或已集成的服务器防护|
+|[ragnarok-clients](https://github.com/Casual-Ragnarok/ragnarok-clients)|按年份、地区、语言整理客户端资源与下载来源|`scripts/generate_pages.py` 生成静态索引；归入客户端与资源|
+|[RagnarokSDE](https://github.com/Casual-Ragnarok/RagnarokSDE)|RO 服务端数据库文件编辑器|随缘仙境定制版，来源 `Tokeiburu/RagnarokSDE`|
+|[ro-effects](https://github.com/Casual-Ragnarok/ro-effects)|RO 特效编号与演示清单|`effects/list/`；按 ID 区间浏览|
+|[ro-selfsys / ro-selftrans](https://github.com/Casual-Ragnarok/ro-selftrans)|客户端文本自助翻译平台设计|本地名 `ro-selfsys`，README 与 origin 为 `ro-selftrans`；设计思路不代表全部功能已实现|
+|[ro-single-client](https://github.com/Casual-Ragnarok/ro-single-client)|旧单机版登录与汉化补丁|README 要求搭配 `Ragnarok_KRO_20190306_Lite` 与 `ro-single-server`|
+|[ro-single-server](https://github.com/Casual-Ragnarok/ro-single-server)|eAthena 系旧单机服务端整合包|支持本机与联网；属于独立历史链，不是当前 Pandas/CasualRO 源码链|
 
 ## 关系图
 
-箭头说明依赖或制品流向，不代表所有步骤已经自动化。
+仅展示有明确依据的 RO 仓库关系。实线包括依赖、产出、配套和站点导航；虚线包括人工流转与工具使用参考，不代表步骤已自动化。
 
 ```mermaid
-flowchart TD
-    engine[casual-ro-server / CasualRO] -->|编译| test[本地 test-2023 运行目录]
-    docker[casual-ro-server-docker] -->|ro-db 容器| test
-    docker -->|生成规则与已审核配置迁移| engine
-    diff[ragexe-diff] -->|原胚与会话资料| warp[WarpEdition]
-    nemo[Nemo / Gitlab] -.->|脚本思路参考；需按 API 适配| warp
-    rea[rea 逆向工具] -.->|二进制定位与验证| warp
-    warp -->|打过补丁的 Ragexe EXE| client[casual-ro-client-patch]
-    diff -->|助手 DLL 和完整 Electron 制品| client
-    assets[RO-GRF 资源子模块] --> grf[grf-crypto-mgr]
-    grf -->|GRF 制品；须单独确认加载顺序| game[最终开发客户端]
-    client -->|package.py| game
-    client -.->|选取发布文件生成新清单；尚未自动集成| launcher[ro-patcher 登陆器]
-    launcher -->|独立目录包部署；按配置下载补丁并启动游戏| game
-    home -.->|官网视觉与插画参考；资源手动复制| launcher
-    docs -.->|Thor 原包和社区皮肤资料参考| launcher
-    rea -.->|Thor 制品分析工具；不是运行依赖| launcher
-    engine <-->|PACKETVER、魔物/道具/宠物标识契约| client
-    docker -->|公开图鉴数据和加水印缩略图的人工导出| feature[casual-ro-feature-showcase]
-    home[casual-ro-website] -->|特色介绍导航| feature
-    home --> docs[ro-docs]
-    home --> downloads[cro-patch-grf]
-    store[hexo-store] -->|生成 NPC 索引 docs/| npcs[ro-npcs 发布仓库]
-    home --> npcs
+flowchart LR
+    subgraph group0["服务端与数据"]
+        repo0["casual-ro-server"]
+        repo1["casual-ro-server-docker"]
+        repo28["ro-single-server"]
+    end
+    subgraph group1["客户端与资源"]
+        repo2["casual-ro-client-patch"]
+        repo3["ro-patcher"]
+        repo4["ragexe-diff"]
+        repo5["grf-crypto-mgr"]
+        repo6["ro-grf-res"]
+        repo23["ragnarok-clients"]
+        repo27["ro-single-client"]
+        repo29["RO-GRF"]
+    end
+    subgraph group2["网站与内容"]
+        repo7["casual-ro-website"]
+        repo8["casual-ro-feature-showcase"]
+        repo9["ro-docs"]
+        repo10["cro-patch-grf"]
+        repo11["hexo-store"]
+        repo12["ro-npcs"]
+        repo13["ro-repo-relation"]
+        repo21["FluxCP"]
+        repo25["ro-effects"]
+        repo26["ro-selfsys"]
+    end
+    subgraph group3["工具与外部目标"]
+        repo14["WarpEdition"]
+        repo15["rea"]
+        repo16["Nemo"]
+        repo17["casual-ro-AI-Bot"]
+        repo18["openkore-docker"]
+        repo19["openkore"]
+        repo20["GRFEditor"]
+        repo22["Gepard"]
+        repo24["RagnarokSDE"]
+    end
+    repo1 -.->|审核后迁移配置与生成数据| repo0
+    repo5 -.->|GRF 与客户端补丁协调发布| repo2
+    repo1 -.->|公开图鉴与水印缩略图导出| repo8
+    repo11 -->|生成并发布 NPC 脚本索引| repo12
+    repo7 -->|网站导航| repo8
+    repo4 -.->|原胚与逐版本会话输入| repo14
+    repo14 -.->|补丁后的 Ragexe EXE| repo2
+    repo4 -.->|RO 助手 DLL / Electron 制品| repo2
+    repo2 -.->|手工准备文件与 JSON 清单| repo3
+    repo6 -.->|审核后的分类素材| repo5
+    repo6 -.->|客户端配置草稿迁移| repo2
+    repo6 -.->|服务端 DB / NPC 草稿迁移| repo0
+    repo1 -->|配套服务端与客户端补丁| repo2
+    repo29 -->|资源子模块 → 素材合包| repo5
+    repo16 -.->|DIFF 教程所用的补丁工具| repo4
+    repo0 -->|封包版本与数据 ID 契约| repo2
+    repo7 -->|网站导航| repo9
+    repo7 -->|网站导航| repo10
+    repo7 -->|网站导航| repo12
+    repo7 -->|导航至脚本商城发布站| repo11
+    repo19 -->|封装 OpenKore 上游源码| repo18
+    repo18 -->|提供多账号运行所用镜像| repo17
+    repo28 -->|历史单机版配套服务端与补丁| repo27
 ```
 
 ## 要改什么，应该去哪里
@@ -73,6 +132,7 @@ flowchart TD
 |修改 RO 助手逻辑或 UI|`ragexe-diff/assistant`；构建制品复制到客户端 `Assistant/runtime`，更新来源与校验清单|
 |修改启动前的更新界面、公告或主题|`ro-patcher`；集中配置在安装目录 `ro-patcher/config.json`，主题在 `ro-patcher/themes/`；不是 `ragexe-diff/assistant`|
 |发布给登陆器自动下载的补丁|先准备客户端变更文件，再用 `ro-patcher/scripts/make-patch.cjs` 生成清单，上传文件及清单到明确配置的 HTTP(S) 地址；尚未与 `package.py` 自动接通|
+|从已解包素材识别资源配套关系、生成初步配置|`ro-grf-res`；先复制输入、核对硬编码路径及 ID 起点；输出需人工审核，详见 [资源分类工具](docs/grf-resource-analysis.md)|
 |合并/替换 SPR、ACT、地图或装备图档|`grf-crypto-mgr` 与其 `RO-GRF` 资源；重新构建并确认 `data.ini`|
 |修改 PokeWorld 宣传或公开图鉴|`casual-ro-feature-showcase`；不要把服务端数据库或原始 GRF 放进去|
 |修改官网首页/导航|`casual-ro-website`|

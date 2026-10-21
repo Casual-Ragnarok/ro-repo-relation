@@ -1,0 +1,914 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RO · 仓库关联关系图</title><style>
+:root{--bg:#edf2f7;--ink:#20334d;--muted:#60748c;--line:#d4dfea;--blue:#2767b0}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI","Microsoft YaHei",sans-serif}header{padding:30px 36px 24px;border-bottom:1px solid var(--line);background:#fff}.eyebrow{font:12px Consolas,monospace;letter-spacing:2px;color:var(--blue)}h1{font-size:32px;margin:10px 0;font-weight:650}header p{margin:0;color:var(--muted);font-size:14px;line-height:1.8}.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:18px 36px}button,input{font:inherit;border:1px solid var(--line);background:white;border-radius:6px;padding:9px 13px;color:var(--ink)}button{cursor:pointer}button:hover,button.active{background:var(--ink);color:white}input{width:260px}button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #57a5ee;outline-offset:3px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;margin:0 24px 24px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:white}.map{overflow:auto;background-color:#f8fafc;background-image:radial-gradient(#cdd9e6 .8px,transparent .8px);background-size:16px 16px;min-height:640px}svg{display:block;width:100%;min-width:850px;height:auto}aside{border-left:1px solid var(--line);padding:24px;overflow-wrap:anywhere}aside h2{font-size:20px;margin:8px 0 12px}aside p{font-size:14px;color:var(--muted);line-height:1.8}aside a{color:var(--blue)}.tag{font:11px Consolas,monospace;color:var(--muted)}.relation{padding:12px 0;border-top:1px solid var(--line);font-size:13px;line-height:1.7}.relation button{border:0;padding:0;text-align:left;color:var(--blue);background:none;font-size:13px}.relation small{display:block;color:var(--muted)}.legend{display:flex;flex-wrap:wrap;gap:20px;padding:0 36px 20px;font-size:12px;color:var(--muted)}.legend span:before{content:"";display:inline-block;width:25px;border-top:2px solid #6685a5;margin:0 7px 3px 0}.legend .manual:before{border-top-style:dashed}.legend .ref:before{border-top-style:dotted}.node{cursor:pointer;outline:none}.node rect{fill:white;stroke:#c9d7e5;stroke-width:1.5}.node:hover rect,.node:focus rect,.node.selected rect{stroke:#2767b0;stroke-width:3}.node text{pointer-events:none}.edge{fill:none;stroke:#8299b0;stroke-width:1.5;opacity:.23}.edge.hot{stroke:#2767b0;stroke-width:2.4;opacity:.9}.faded{opacity:.14}.group-title{font-size:15px;font-weight:600;fill:#425b77}footer{padding:0 36px 25px;font-size:12px;line-height:1.8;color:var(--muted)}@media(max-width:900px){.layout{grid-template-columns:1fr;margin:0 12px 20px}aside{border-left:0;border-top:1px solid var(--line)}header{padding:24px}.toolbar{padding:16px 24px}h1{font-size:26px}.map{min-height:0}}@media print{.toolbar{display:none}.layout{display:block}aside{border:0}svg{min-width:0}.map{overflow:visible}header{padding:10px}footer{padding:10px}}
+details{font-size:12px;color:var(--muted);margin:12px 0}summary{cursor:pointer}.source{font-size:11px;line-height:1.7;margin-top:6px}.edge.faded{opacity:.05}svg{min-width:1100px}aside{align-self:start;position:sticky;top:0;max-height:100vh;overflow-y:auto}@media(max-width:900px){aside{position:static;max-height:none}}
+</style></head><body><header><div class="eyebrow">CASUAL RAGNAROK / ENGINEERING ATLAS</div><h1>RO · 仓库关联关系图</h1><p>按本地 README 核对功能，按实际用途分类；点击仓库查看直接关联及来源。</p></header><div class="toolbar"><div id="tabs"></div><input id="search" type="search" placeholder="搜索仓库或功能…" aria-label="搜索仓库或功能"><button id="reset">重置选择</button><button id="download">导出 SVG 图</button></div><div class="legend"><span>依赖 / 产出 / 配套 / 导航</span><span class="manual">人工准备或审核迁移</span><span class="ref">工具使用参考</span></div><main class="layout"><div class="map"><svg id="graph" xmlns="http://www.w3.org/2000/svg" aria-label="仓库关系图" role="group"></svg></div><aside id="detail" aria-live="polite"></aside></main><footer>资料核对：2026-10-21 · 29 个本地项目 + RO-GRF 资源仓库。功能以各仓库 README 为主，连线附本地文档或配置依据。<br>分支为本地记录快照；仓库存在不代表功能已完成或已部署。<a href="https://github.com/Casual-Ragnarok/ro-repo-relation/blob/main/README.md">查看完整索引</a> · 数据更新后运行 node scripts/build-map.mjs 重新内嵌。</footer><script id="repo-data" type="application/json">{
+  "verified_date": "2026-10-21",
+  "categories": [
+    {
+      "name": "服务端与数据",
+      "color": "#407c78"
+    },
+    {
+      "name": "客户端与资源",
+      "color": "#2767b0"
+    },
+    {
+      "name": "网站与内容",
+      "color": "#8869a6"
+    },
+    {
+      "name": "工具与外部目标",
+      "color": "#ad7840"
+    }
+  ],
+  "nodes": [
+    {
+      "name": "casual-ro-server",
+      "role": "Pandas 基础上的定制服务端与特性分支",
+      "description": "随缘仙境服务端源码；CasualRO/ 为定制引擎，Pandas 为上游子模块。维护特性分支、合并升级、编译和发布。",
+      "diagram_category": "服务端与数据",
+      "branch_snapshot": "codex/test-2023",
+      "repository_url": "https://github.com/Casual-Ragnarok/casual-ro-server",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-server/blob/codex/test-2023/README.md",
+          "label": "casual-ro-server/README.md"
+        }
+      ]
+    },
+    {
+      "name": "casual-ro-server-docker",
+      "role": "Pandas 服务端 Docker 构建、部署与配置",
+      "description": "以 Docker 编译、安装和运行 Pandas 服务端，配套数据库、Web 服务、自定义 NPC 与生成工具。当前 Dockerfile 拉取 PandasWS/Pandas，不能理解为自动构建 casual-ro-server 当前分支。",
+      "diagram_category": "服务端与数据",
+      "branch_snapshot": "testing",
+      "repository_url": "https://github.com/Casual-Ragnarok/casual-ro-server-docker",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-server-docker/blob/testing/README.md",
+          "label": "casual-ro-server-docker/README.md"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-server-docker/blob/testing/Dockerfile",
+          "label": "casual-ro-server-docker/Dockerfile"
+        }
+      ]
+    },
+    {
+      "name": "casual-ro-client-patch",
+      "role": "随缘仙境登录补丁、配置与客户端装配",
+      "description": "覆盖到完整 kRO 客户端使用的补丁包，维护 data/System 配置、Ragexe、打包发布和适配版本的 RO 助手制品。README 中部分路径及版本沿用旧记录，当前脚本入口为 py/package.py。",
+      "diagram_category": "客户端与资源",
+      "branch_snapshot": "master",
+      "repository_url": "https://github.com/Casual-Ragnarok/casual-ro-client-patch",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-client-patch/blob/master/README.md",
+          "label": "casual-ro-client-patch/README.md"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-client-patch/blob/master/Assistant/README.md",
+          "label": "casual-ro-client-patch/Assistant/README.md"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-client-patch/blob/master/GenLauncher.md",
+          "label": "casual-ro-client-patch/GenLauncher.md"
+        }
+      ]
+    },
+    {
+      "name": "ro-patcher",
+      "role": "Electron 更新登陆器、公告与游戏启动",
+      "description": "支持主题切换、JSON 公告、补丁下载校验、文件替换及恢复日志。分发整个 Electron 目录包。尚未实现 .thor 解包、GRF 内部合并和自身升级；与 RO 助手是独立项目。",
+      "diagram_category": "客户端与资源",
+      "branch_snapshot": "main",
+      "repository_url": "https://github.com/Casual-Ragnarok/ro-patcher",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-patcher/blob/main/README.md",
+          "label": "ro-patcher/README.md"
+        }
+      ]
+    },
+    {
+      "name": "ragexe-diff",
+      "role": "Ragexe DIFF 教程、原胚与 RO 助手源码",
+      "description": "记录客户端 EXE 的 DIFF 方法、原胚和会话、封包密钥与最终 EXE MD5 核对；assistant/ 维护 ROAssistant DLL 和 Electron UI。助手仅对已适配原胚提供支持。",
+      "diagram_category": "客户端与资源",
+      "branch_snapshot": "main",
+      "repository_url": "https://github.com/Casual-Ragnarok/ragexe-diff",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ragexe-diff/blob/main/README.md",
+          "label": "ragexe-diff/README.md"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/ragexe-diff/blob/main/assistant/README.md",
+          "label": "ragexe-diff/assistant/README.md"
+        }
+      ]
+    },
+    {
+      "name": "grf-crypto-mgr",
+      "role": "GRF 加解密、内存提取与素材合包",
+      "description": "通过 Playbook 编排密钥提取、GRF 加解密、文件表处理、运行时内存提取及专用恢复；auto_merge_grf.py 合并 RO-GRF 素材并可选加密。",
+      "diagram_category": "客户端与资源",
+      "branch_snapshot": "main",
+      "repository_url": "https://github.com/Casual-Ragnarok/grf-crypto-mgr",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/grf-crypto-mgr/blob/main/README.md",
+          "label": "grf-crypto-mgr/README.md"
+        }
+      ]
+    },
+    {
+      "name": "ro-grf-res",
+      "role": "GRF 素材分类与资源配置逆向推导",
+      "description": "README 定义为「RO GRF 图档资源配置逆向推导器」。分类、重复筛查及客户端/服务端配置草稿由脚本实现，输入为已解包素材；不直接解包或打包 GRF，草稿需要人工核对。",
+      "diagram_category": "客户端与资源",
+      "branch_snapshot": "main",
+      "repository_url": "https://github.com/Casual-Ragnarok/ro-grf-res",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-grf-res/blob/main/README.md",
+          "label": "ro-grf-res/README.md"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-grf-res/blob/main/py/classify_grf.py",
+          "label": "ro-grf-res/py/classify_grf.py"
+        }
+      ]
+    },
+    {
+      "name": "casual-ro-website",
+      "role": "官网首页与商城、资料、补丁导航",
+      "description": "随缘仙境首页，汇集脚本商城、NPC 索引、开发资料、特色介绍和客户端补丁入口。原生 HTML/CSS/JS 构建并通过 Pages 发布。",
+      "diagram_category": "网站与内容",
+      "branch_snapshot": "master",
+      "repository_url": "https://github.com/Casual-Ragnarok/casual-ro-website",
+      "page": {
+        "url": "https://casualro.top/",
+        "label": "GitHub Pages",
+        "kind": "custom-domain",
+        "source": "CNAME",
+        "verified_date": "2026-10-21"
+      },
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-website/blob/master/README.md",
+          "label": "casual-ro-website/README.md"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-website/blob/master/assets/site.js",
+          "label": "casual-ro-website/assets/site.js"
+        }
+      ]
+    },
+    {
+      "name": "casual-ro-feature-showcase",
+      "role": "玩家向特色介绍与 PokeWorld 公开图鉴",
+      "description": "维护玩法介绍、前端交互、名称形态图鉴及获准展示的水印缩略图。不是服务端代码、战斗数据库或原始 GRF 资源仓库；README 保留默认 Pages 入口，线上已跳转至 feature.casualro.top 自定义域名。",
+      "diagram_category": "网站与内容",
+      "branch_snapshot": "main",
+      "repository_url": "https://github.com/Casual-Ragnarok/casual-ro-feature-showcase",
+      "page": {
+        "url": "https://feature.casualro.top/",
+        "label": "GitHub Pages",
+        "kind": "custom-domain",
+        "source": "线上 Pages 重定向与 HTTPS 实测",
+        "verified_date": "2026-10-21"
+      },
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-feature-showcase/blob/main/README.md",
+          "label": "casual-ro-feature-showcase/README.md"
+        }
+      ]
+    },
+    {
+      "name": "ro-docs",
+      "role": "RO 开发运营资料与工具归档",
+      "description": "收录个人开发、运营 RO 时使用的资料和工具；部分资料为历史参考。实际站点内容主要位于 docs/；README 仍保留旧域名。",
+      "diagram_category": "网站与内容",
+      "branch_snapshot": "master",
+      "repository_url": "https://github.com/Casual-Ragnarok/ro-docs",
+      "page": {
+        "url": "https://docs.casualro.top/",
+        "label": "GitHub Pages",
+        "kind": "custom-domain",
+        "source": "docs/CNAME",
+        "verified_date": "2026-10-21"
+      },
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-docs/blob/master/README.md",
+          "label": "ro-docs/README.md"
+        }
+      ]
+    },
+    {
+      "name": "cro-patch-grf",
+      "role": "已加密 GRF 下载列表与加载指引",
+      "description": "面向玩家说明 GRF 手动下载、必须/可选补丁和 data.ini 加载顺序；页面提供下载入口，不负责 GRF 构建或 JSON 更新清单托管。",
+      "diagram_category": "网站与内容",
+      "branch_snapshot": "master",
+      "repository_url": "https://github.com/Casual-Ragnarok/cro-patch-grf",
+      "page": {
+        "url": "https://grf.casualro.top/",
+        "label": "GitHub Pages",
+        "kind": "custom-domain",
+        "source": "CNAME",
+        "verified_date": "2026-10-21"
+      },
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/cro-patch-grf/blob/master/README.md",
+          "label": "cro-patch-grf/README.md"
+        }
+      ]
+    },
+    {
+      "name": "hexo-store",
+      "role": "Hexo NPC 脚本商城与索引生成",
+      "description": "解析 NPC 模块 README 生成分类列表和商城文章，打包分发 NPC 模块，提供源码保护、淘宝目录转换及静态站点发布工具链。",
+      "diagram_category": "网站与内容",
+      "branch_snapshot": "master",
+      "repository_url": "https://github.com/Casual-Ragnarok/hexo-store",
+      "page": {
+        "url": "https://store.casualro.top/",
+        "label": "商城发布站",
+        "kind": "custom-domain",
+        "source": "README.md",
+        "note": "商城源码生成后发布至 ro-store；不是 hexo-store 仓库自身的默认 Pages 地址。",
+        "verified_date": "2026-10-21"
+      },
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/hexo-store/blob/master/README.md",
+          "label": "hexo-store/README.md"
+        }
+      ]
+    },
+    {
+      "name": "ro-npcs",
+      "role": "NPC 脚本清单静态发布副本",
+      "description": "随缘仙境 NPC 脚本索引。生成源和模板位于 hexo-store；本地仓库属于 Casual-Ragnarok，官网所用的另一发布目标为 EHakker/ro-npcs。",
+      "diagram_category": "网站与内容",
+      "branch_snapshot": "master",
+      "repository_url": "https://github.com/Casual-Ragnarok/ro-npcs",
+      "page": {
+        "url": "https://npc.casualro.top/",
+        "label": "NPC 索引发布站",
+        "kind": "custom-domain",
+        "source": "docs/CNAME",
+        "note": "官网所用发布目标为 EHakker/ro-npcs。",
+        "verified_date": "2026-10-21"
+      },
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-npcs/blob/master/README.md",
+          "label": "ro-npcs/README.md"
+        }
+      ]
+    },
+    {
+      "name": "ro-repo-relation",
+      "role": "RO 仓库职责、关系与流程索引",
+      "description": "维护 RO 相关仓库的职责、路径、协作关系和操作入口，并提供离线 HTML 关系图；不承载游戏代码或制品。",
+      "diagram_category": "网站与内容",
+      "branch_snapshot": "main",
+      "repository_url": "https://github.com/Casual-Ragnarok/ro-repo-relation",
+      "page": {
+        "url": "https://casual-ragnarok.github.io/ro-repo-relation/",
+        "label": "GitHub Pages",
+        "kind": "default-domain",
+        "source": "README.md",
+        "verified_date": "2026-10-21"
+      },
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-repo-relation/blob/main/README.md",
+          "label": "ro-repo-relation/README.md"
+        }
+      ]
+    },
+    {
+      "name": "WarpEdition",
+      "role": "RO 客户端 DIFF 工具与补丁脚本定制",
+      "description": "WARP 定制版，维护客户端补丁脚本、逐版本会话和支持说明。README 记录 2023–2025 原胚适配；ROAssistant 源码已迁至 ragexe-diff/assistant，本仓库保留 DLL 加载补丁。",
+      "diagram_category": "工具与外部目标",
+      "branch_snapshot": "master",
+      "repository_url": "https://github.com/Casual-Ragnarok/WarpEdition",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/WarpEdition/blob/master/README.md",
+          "label": "WarpEdition/README.md"
+        }
+      ]
+    },
+    {
+      "name": "rea",
+      "role": "跨二进制、应用与运行时的逆向分析工具",
+      "description": "通用 MCP 逆向分析工程，可分析原生二进制、JavaScript/Electron、.NET 和网站。RO 开发中作为分析辅助；其内部第三方工具不展开为 RO 仓库节点。",
+      "diagram_category": "工具与外部目标",
+      "branch_snapshot": "main",
+      "repository_url": "https://github.com/EXP-Tools/rea",
+      "page": {
+        "url": "https://rea.tools/",
+        "label": "上游项目官网",
+        "kind": "upstream",
+        "source": "README.md",
+        "note": "上游项目官网，不表示当前 fork 独立部署。",
+        "verified_date": "2026-10-21"
+      },
+      "evidence": [
+        {
+          "url": "https://github.com/EXP-Tools/rea/blob/main/README.md",
+          "label": "rea/README.md"
+        }
+      ]
+    },
+    {
+      "name": "Nemo",
+      "role": "RO 客户端 EXE 补丁工具",
+      "description": "通过补丁脚本修改闭源 RO 客户端，使其适配 Hercules 等模拟器。包含预设配置和补丁报告；本地位于 Gitlab/Nemo，而非 Github 目录。",
+      "diagram_category": "工具与外部目标",
+      "branch_snapshot": "master",
+      "repository_url": "https://gitlab.com/4144/Nemo",
+      "evidence": [
+        {
+          "url": "https://gitlab.com/4144/Nemo/-/blob/master/README.md",
+          "label": "Nemo/README.md"
+        }
+      ]
+    },
+    {
+      "name": "casual-ro-AI-Bot",
+      "role": "基于 OpenKore 的多账号 Bot 容器管理",
+      "description": "README 标题标注「AI 机器人（强化学习模型）」。已检查的 Python 脚本实际提供账号控制目录创建、配置与多账号容器连接/断开，使用 openkore-docker 镜像；不据标题宣称已实现强化学习训练。",
+      "diagram_category": "工具与外部目标",
+      "branch_snapshot": "master",
+      "repository_url": "https://github.com/Casual-Ragnarok/casual-ro-AI-Bot",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-AI-Bot/blob/master/README.md",
+          "label": "casual-ro-AI-Bot/README.md"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-AI-Bot/blob/master/docker-compose.yml",
+          "label": "casual-ro-AI-Bot/docker-compose.yml"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-AI-Bot/blob/master/py/03_connect_to_server.py",
+          "label": "casual-ro-AI-Bot/py/03_connect_to_server.py"
+        }
+      ]
+    },
+    {
+      "name": "openkore-docker",
+      "role": "OpenKore Docker 封装与运行配置",
+      "description": "封装 OpenKore、系统依赖与启动脚本，提供镜像构建、连接 RO 服务器及 control 行为策略配置。其源码子模块指向 OpenKore/openkore 上游。",
+      "diagram_category": "工具与外部目标",
+      "branch_snapshot": "master",
+      "repository_url": "https://github.com/Casual-Ragnarok/openkore-docker",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/openkore-docker/blob/master/README.md",
+          "label": "openkore-docker/README.md"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/openkore-docker/blob/master/.gitmodules",
+          "label": "openkore-docker/.gitmodules"
+        }
+      ]
+    },
+    {
+      "name": "openkore",
+      "role": "跨平台 RO 自定义客户端与自动化助手",
+      "description": "OpenKore 的本地 fork；Perl 开发的 RO 自定义客户端与智能自动化助手，支持 Linux、Windows、macOS。本地 fork 不等于 openkore-docker 子模块的远端。",
+      "diagram_category": "工具与外部目标",
+      "branch_snapshot": "casualro",
+      "repository_url": "https://github.com/Casual-Ragnarok/openkore",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/openkore/blob/casualro/README.md",
+          "label": "openkore/README.md"
+        }
+      ]
+    },
+    {
+      "name": "GRFEditor",
+      "role": "GRF / GPF / Thor 格式编辑器与库",
+      "description": "GRFEditor 的随缘仙境定制分支，提供 GRF/GPF/Thor 格式编辑及 GRF 库接口。README 来源为 Tokeiburu/GRFEditor；未据此假设与当前合包脚本存在自动调用。",
+      "diagram_category": "工具与外部目标",
+      "branch_snapshot": "master",
+      "repository_url": "https://github.com/Casual-Ragnarok/GRFEditor",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/GRFEditor/blob/master/README.md",
+          "label": "GRFEditor/README.md"
+        }
+      ]
+    },
+    {
+      "name": "FluxCP",
+      "role": "面向 rAthena 的 PHP Web 控制面板",
+      "description": "Flux Control Panel，用于 rAthena 服务器的 Web 管理与玩家服务，包含新闻页面、工单、排名及日志等功能；属于 PHP/MySQL 应用，区别于静态官网。",
+      "diagram_category": "网站与内容",
+      "branch_snapshot": "master",
+      "repository_url": "https://github.com/Casual-Ragnarok/FluxCP",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/FluxCP/blob/master/README.md",
+          "label": "FluxCP/README.md"
+        }
+      ]
+    },
+    {
+      "name": "Gepard",
+      "role": "Gepard 反作弊绕过研究工程",
+      "description": "README 标题为 Gepard Bypass，描述对 Gepard 反作弊钩子与加载限制的绕过和封包观察。不是官方 Gepard 防护服务或本服已集成的防护组件。",
+      "diagram_category": "工具与外部目标",
+      "branch_snapshot": "master",
+      "repository_url": "https://github.com/Hypercall/Gepard",
+      "evidence": [
+        {
+          "url": "https://github.com/Hypercall/Gepard/blob/master/README.md",
+          "label": "Gepard/README.md"
+        }
+      ]
+    },
+    {
+      "name": "ragnarok-clients",
+      "role": "历年 RO 客户端资源与下载来源索引",
+      "description": "按年份、地区与语言整理完整客户端资源、补丁状态和获取来源，包含随缘仙境简中版本。scripts/generate_pages.py 可生成静态目录站；仓库以资源索引为主要职责。",
+      "diagram_category": "客户端与资源",
+      "branch_snapshot": "main",
+      "repository_url": "https://github.com/Casual-Ragnarok/ragnarok-clients",
+      "page": {
+        "url": "https://casual-ragnarok.github.io/ragnarok-clients/",
+        "label": "GitHub Pages",
+        "kind": "default-domain",
+        "source": "README.md",
+        "verified_date": "2026-10-21"
+      },
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ragnarok-clients/blob/main/README.md",
+          "label": "ragnarok-clients/README.md"
+        }
+      ]
+    },
+    {
+      "name": "RagnarokSDE",
+      "role": "RO 服务端数据库文件编辑器",
+      "description": "RagnarokSDE 的随缘仙境定制版，编辑 RO 服务端数据库文件，来源为 Tokeiburu/RagnarokSDE。未查到针对当前服务端分支的自动同步关系。",
+      "diagram_category": "工具与外部目标",
+      "branch_snapshot": "fix-def-encoding",
+      "repository_url": "https://github.com/Casual-Ragnarok/RagnarokSDE",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/RagnarokSDE/blob/fix-def-encoding/README.md",
+          "label": "RagnarokSDE/README.md"
+        }
+      ]
+    },
+    {
+      "name": "ro-effects",
+      "role": "RO 特效编号与演示清单",
+      "description": "按特效 ID 区间维护 RO 特效演示列表（effects/list/）。职责为展示和查阅，不是特效运行引擎或自动生成 GRF 的资源管线。",
+      "diagram_category": "网站与内容",
+      "branch_snapshot": "master",
+      "repository_url": "https://github.com/Casual-Ragnarok/ro-effects",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-effects/blob/master/README.md",
+          "label": "ro-effects/README.md"
+        }
+      ]
+    },
+    {
+      "name": "ro-selfsys",
+      "role": "RO 客户端文本自助翻译平台设计",
+      "description": "本地目录名 ro-selfsys；README 标题和 origin 均为 ro-selftrans。README 描述若依框架、GPT 翻译、异步队列及简繁转换的设计思路，不能当作已完成能力清单。",
+      "diagram_category": "网站与内容",
+      "branch_snapshot": "master",
+      "repository_url": "https://github.com/Casual-Ragnarok/ro-selftrans",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-selftrans/blob/master/README.md",
+          "label": "ro-selfsys/README.md"
+        }
+      ]
+    },
+    {
+      "name": "ro-single-client",
+      "role": "旧单机版客户端登录与汉化补丁",
+      "description": "与 ro-single-server 配套的旧单机客户端补丁，README 要求覆盖到 Ragnarok_KRO_20190306_Lite；可通过 sclientinfo.xml 指向联网服务器。属于独立历史链。",
+      "diagram_category": "客户端与资源",
+      "branch_snapshot": "master",
+      "repository_url": "https://github.com/Casual-Ragnarok/ro-single-client",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-single-client/blob/master/README.md",
+          "label": "ro-single-client/README.md"
+        }
+      ]
+    },
+    {
+      "name": "ro-single-server",
+      "role": "eAthena 系旧单机服务端整合包",
+      "description": "历史 RO 单机版服务端，README 描述基于 eAthena 的整合版本，支持本机与联网部署；与 ro-single-client 配套，不等同于当前 Pandas/CasualRO 源码链。",
+      "diagram_category": "服务端与数据",
+      "branch_snapshot": "master",
+      "repository_url": "https://github.com/Casual-Ragnarok/ro-single-server",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-single-server/blob/master/README.md",
+          "label": "ro-single-server/README.md"
+        }
+      ]
+    },
+    {
+      "name": "RO-GRF",
+      "role": "GRF 图档与客户端素材资源仓库",
+      "description": "Hugging Face 数据集 Git 仓库，以子模块形式供 grf-crypto-mgr 使用，收录随缘仙境图档、系列素材、界面/地图补丁与调色板。",
+      "diagram_category": "客户端与资源",
+      "repository_url": "https://huggingface.co/datasets/EXPM02/RO-GRF",
+      "evidence": [
+        {
+          "url": "https://huggingface.co/datasets/EXPM02/RO-GRF/blob/main/README.md",
+          "label": "RO-GRF/README.md"
+        }
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "source": "casual-ro-server-docker",
+      "target": "casual-ro-server",
+      "label": "审核后迁移配置与生成数据",
+      "mode": "manual",
+      "note": "配置协作；Dockerfile 当前拉取 PandasWS/Pandas，不自动构建当前 CasualRO 工作区。",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-repo-relation/blob/main/docs/development-and-release.md",
+          "label": "ro-repo-relation/docs/development-and-release.md"
+        }
+      ]
+    },
+    {
+      "source": "grf-crypto-mgr",
+      "target": "casual-ro-client-patch",
+      "label": "GRF 与客户端补丁协调发布",
+      "mode": "manual",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-repo-relation/blob/main/docs/development-and-release.md",
+          "label": "ro-repo-relation/docs/development-and-release.md"
+        }
+      ]
+    },
+    {
+      "source": "casual-ro-server-docker",
+      "target": "casual-ro-feature-showcase",
+      "label": "公开图鉴与水印缩略图导出",
+      "mode": "manual",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-repo-relation/blob/main/docs/development-and-release.md",
+          "label": "ro-repo-relation/docs/development-and-release.md"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-feature-showcase/blob/main/README.md",
+          "label": "casual-ro-feature-showcase/README.md"
+        }
+      ]
+    },
+    {
+      "source": "hexo-store",
+      "target": "ro-npcs",
+      "label": "生成并发布 NPC 脚本索引",
+      "mode": "artifact",
+      "note": "本地 ro-npcs 与官网所用 EHakker/ro-npcs 发布目标须区分。",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/hexo-store/blob/master/README.md",
+          "label": "hexo-store/README.md"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-repo-relation/blob/main/docs/websites.md",
+          "label": "ro-repo-relation/docs/websites.md"
+        }
+      ]
+    },
+    {
+      "source": "casual-ro-website",
+      "target": "casual-ro-feature-showcase",
+      "label": "网站导航",
+      "mode": "navigation",
+      "note": "网站入口关联，不表示构建依赖。",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-website/blob/master/README.md",
+          "label": "casual-ro-website/README.md"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-website/blob/master/assets/site.js",
+          "label": "casual-ro-website/assets/site.js"
+        }
+      ]
+    },
+    {
+      "source": "ragexe-diff",
+      "target": "WarpEdition",
+      "label": "原胚与逐版本会话输入",
+      "mode": "manual",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/WarpEdition/blob/master/Sessions/Clients/README.md",
+          "label": "WarpEdition/Sessions/Clients/README.md"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-repo-relation/blob/main/docs/client-toolchain.md",
+          "label": "ro-repo-relation/docs/client-toolchain.md"
+        }
+      ]
+    },
+    {
+      "source": "WarpEdition",
+      "target": "casual-ro-client-patch",
+      "label": "补丁后的 Ragexe EXE",
+      "mode": "manual",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-repo-relation/blob/main/docs/client-toolchain.md",
+          "label": "ro-repo-relation/docs/client-toolchain.md"
+        }
+      ]
+    },
+    {
+      "source": "ragexe-diff",
+      "target": "casual-ro-client-patch",
+      "label": "RO 助手 DLL / Electron 制品",
+      "mode": "manual",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-client-patch/blob/master/Assistant/README.md",
+          "label": "casual-ro-client-patch/Assistant/README.md"
+        }
+      ]
+    },
+    {
+      "source": "casual-ro-client-patch",
+      "target": "ro-patcher",
+      "label": "手工准备文件与 JSON 清单",
+      "mode": "manual",
+      "note": "制品衔接方向；package.py 尚未自动生成新登陆器清单。",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-repo-relation/blob/main/docs/launcher-and-updates.md",
+          "label": "ro-repo-relation/docs/launcher-and-updates.md"
+        }
+      ]
+    },
+    {
+      "source": "ro-grf-res",
+      "target": "grf-crypto-mgr",
+      "label": "审核后的分类素材",
+      "mode": "manual",
+      "note": "分类素材经人工审核后交资源工程；不是现有自动调用依赖",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-repo-relation/blob/main/docs/grf-resource-analysis.md",
+          "label": "ro-repo-relation/docs/grf-resource-analysis.md"
+        }
+      ]
+    },
+    {
+      "source": "ro-grf-res",
+      "target": "casual-ro-client-patch",
+      "label": "客户端配置草稿迁移",
+      "mode": "manual",
+      "note": "iteminfo、外观池、宠物表等草稿；须核对已有 ID 和资源名",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-repo-relation/blob/main/docs/grf-resource-analysis.md",
+          "label": "ro-repo-relation/docs/grf-resource-analysis.md"
+        }
+      ]
+    },
+    {
+      "source": "ro-grf-res",
+      "target": "casual-ro-server",
+      "label": "服务端 DB / NPC 草稿迁移",
+      "mode": "manual",
+      "note": "数据库/商店/召唤脚本草稿；随机占位战斗数值不能覆盖当前平衡配置",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-repo-relation/blob/main/docs/grf-resource-analysis.md",
+          "label": "ro-repo-relation/docs/grf-resource-analysis.md"
+        }
+      ]
+    },
+    {
+      "source": "casual-ro-server-docker",
+      "target": "casual-ro-client-patch",
+      "label": "配套服务端与客户端补丁",
+      "mode": "contract",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-server-docker/blob/testing/README.md",
+          "label": "casual-ro-server-docker/README.md"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-client-patch/blob/master/README.md",
+          "label": "casual-ro-client-patch/README.md"
+        }
+      ]
+    },
+    {
+      "source": "RO-GRF",
+      "target": "grf-crypto-mgr",
+      "label": "资源子模块 → 素材合包",
+      "mode": "dependency",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/grf-crypto-mgr/blob/main/.gitmodules",
+          "label": "grf-crypto-mgr/.gitmodules"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/grf-crypto-mgr/blob/main/README.md",
+          "label": "grf-crypto-mgr/README.md"
+        }
+      ]
+    },
+    {
+      "source": "Nemo",
+      "target": "ragexe-diff",
+      "label": "DIFF 教程所用的补丁工具",
+      "mode": "reference",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ragexe-diff/blob/main/README.md",
+          "label": "ragexe-diff/README.md"
+        }
+      ]
+    },
+    {
+      "source": "casual-ro-server",
+      "target": "casual-ro-client-patch",
+      "label": "封包版本与数据 ID 契约",
+      "mode": "contract",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-repo-relation/blob/main/docs/development-and-release.md",
+          "label": "ro-repo-relation/docs/development-and-release.md"
+        }
+      ]
+    },
+    {
+      "source": "casual-ro-website",
+      "target": "ro-docs",
+      "label": "网站导航",
+      "mode": "navigation",
+      "note": "网站入口关联，不表示构建依赖。",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-website/blob/master/README.md",
+          "label": "casual-ro-website/README.md"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-website/blob/master/assets/site.js",
+          "label": "casual-ro-website/assets/site.js"
+        }
+      ]
+    },
+    {
+      "source": "casual-ro-website",
+      "target": "cro-patch-grf",
+      "label": "网站导航",
+      "mode": "navigation",
+      "note": "网站入口关联，不表示构建依赖。",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-website/blob/master/README.md",
+          "label": "casual-ro-website/README.md"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-website/blob/master/assets/site.js",
+          "label": "casual-ro-website/assets/site.js"
+        }
+      ]
+    },
+    {
+      "source": "casual-ro-website",
+      "target": "ro-npcs",
+      "label": "网站导航",
+      "mode": "navigation",
+      "note": "网站入口关联，不表示构建依赖。",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-website/blob/master/README.md",
+          "label": "casual-ro-website/README.md"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-website/blob/master/assets/site.js",
+          "label": "casual-ro-website/assets/site.js"
+        }
+      ]
+    },
+    {
+      "source": "casual-ro-website",
+      "target": "hexo-store",
+      "label": "导航至脚本商城发布站",
+      "mode": "navigation",
+      "note": "商城源码为 hexo-store；官网导航链接指向生成后的商城发布站。",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-website/blob/master/README.md",
+          "label": "casual-ro-website/README.md"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-website/blob/master/assets/site.js",
+          "label": "casual-ro-website/assets/site.js"
+        }
+      ]
+    },
+    {
+      "source": "openkore",
+      "target": "openkore-docker",
+      "label": "封装 OpenKore 上游源码",
+      "mode": "dependency",
+      "note": "表示同一 OpenKore 项目；Docker 子模块远端为 OpenKore/openkore，不是本地 Casual-Ragnarok fork。",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/openkore-docker/blob/master/README.md",
+          "label": "openkore-docker/README.md"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/openkore-docker/blob/master/.gitmodules",
+          "label": "openkore-docker/.gitmodules"
+        }
+      ]
+    },
+    {
+      "source": "openkore-docker",
+      "target": "casual-ro-AI-Bot",
+      "label": "提供多账号运行所用镜像",
+      "mode": "dependency",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-AI-Bot/blob/master/docker-compose.yml",
+          "label": "casual-ro-AI-Bot/docker-compose.yml"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/casual-ro-AI-Bot/blob/master/py/03_connect_to_server.py",
+          "label": "casual-ro-AI-Bot/py/03_connect_to_server.py"
+        }
+      ]
+    },
+    {
+      "source": "ro-single-server",
+      "target": "ro-single-client",
+      "label": "历史单机版配套服务端与补丁",
+      "mode": "contract",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-single-server/blob/master/README.md",
+          "label": "ro-single-server/README.md"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/ro-single-client/blob/master/README.md",
+          "label": "ro-single-client/README.md"
+        }
+      ]
+    }
+  ]
+}</script><script>
+const data=JSON.parse(document.getElementById('repo-data').textContent);
+const buckets=data.categories.map(category=>[category.name,category.color,data.nodes.filter(n=>n.diagram_category===category.name).map(n=>n.name)]);
+const byName=new Map(data.nodes.map(n=>[n.name,n]));
+const edges=data.relations;let selected='',view='全部仓库',query='';const svg=document.getElementById('graph');const NS='http://www.w3.org/2000/svg';
+const modeLabels={dependency:'源码 / 资源 / 镜像依赖',artifact:'生成与发布',manual:'人工准备或审核迁移',contract:'客户端与服务端配套',reference:'工具使用参考',navigation:'网站导航'};
+function el(tag,attrs={},text){const e=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));if(text!==undefined)e.textContent=text;return e}
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function dash(e){return e.mode==='reference'?'3 6':e.mode==='manual'?'8 5':''}
+function visible(name){if(view==='全部仓库')return true;if(view==='网站与内容')return byName.get(name)?.diagram_category==='网站与内容';if(view==='Bot 与单机')return ['casual-ro-AI-Bot','openkore','openkore-docker','ro-single-server','ro-single-client'].includes(name);return byName.get(name)?.diagram_category==='客户端与资源'||['casual-ro-server','casual-ro-server-docker','WarpEdition','Nemo','GRFEditor','RagnarokSDE'].includes(name)}
+function textLines(s,max=21){const chars=Array.from(s),lines=[];for(let i=0;i<chars.length;i+=max)lines.push(chars.slice(i,i+max).join(''));return lines}
+function render(){svg.replaceChildren();const defs=el('defs');const marker=el('marker',{id:'arrow',viewBox:'0 0 10 10',refX:9,refY:5,markerWidth:6,markerHeight:6,orient:'auto-start-reverse'});marker.append(el('path',{d:'M 0 0 L 10 5 L 0 10 z',fill:'#6e8daa'}));defs.append(marker);svg.append(defs);const pos=new Map();let max=0;buckets.forEach(([title,color,names],col)=>{const list=names.filter(visible);if(!list.length)return;const x=24+col*330;svg.append(el('text',{x,y:34,class:'group-title'},title+' · '+list.length));list.forEach((name,i)=>{pos.set(name,{x,y:65+i*132,color});max=Math.max(max,65+i*132+108)})});svg.setAttribute('viewBox',`0 0 1330 ${max+30}`);const related=new Set([selected]);edges.filter(e=>e.source===selected||e.target===selected).forEach(e=>{related.add(e.source);related.add(e.target)});
+const matches=name=>!query||(name+' '+byName.get(name).role+' '+byName.get(name).description).toLowerCase().includes(query);
+edges.forEach(e=>{const a=pos.get(e.source),b=pos.get(e.target);if(!a||!b)return;let x1=a.x+290,y1=a.y+50,x2=b.x,y2=b.y+50,d;if(a.x===b.x){x1=a.x+290;x2=b.x+290;d=`M${x1},${y1} C${x1+25},${y1} ${x2+25},${y2} ${x2},${y2}`}else{if(a.x>b.x){x1=a.x;x2=b.x+290}const mid=(x1+x2)/2;d=`M${x1},${y1} C${mid},${y1} ${mid},${y2} ${x2},${y2}`}const hot=e.source===selected||e.target===selected;const p=el('path',{d,class:'edge'+(hot?' hot':'')+((selected&&!hot||query&&!matches(e.source)&&!matches(e.target))?' faded':''),'stroke-dasharray':dash(e),'marker-end':'url(#arrow)'});p.append(el('title',{},`${e.source} → ${e.target}：${e.label}`));svg.append(p)});
+pos.forEach((p,name)=>{const n=byName.get(name);const g=el('g',{class:'node'+(selected===name?' selected':'')+((selected&&!related.has(name)||!matches(name))?' faded':''),tabindex:0,role:'button','aria-label':name+'，'+n.role});g.append(el('rect',{x:p.x,y:p.y,width:290,height:108,rx:7}));g.append(el('rect',{x:p.x,y:p.y+12,width:3,height:84,style:`fill:${p.color};stroke:none`}));g.append(el('text',{x:p.x+14,y:p.y+27,'font-family':'Consolas,Microsoft YaHei,monospace','font-size':name.length>27?12:14,'font-weight':600,fill:'#20334d'},name));textLines(n.role).forEach((line,i)=>g.append(el('text',{x:p.x+14,y:p.y+51+i*18,'font-size':13,fill:'#60748c'},line)));g.append(el('text',{x:p.x+14,y:p.y+95,'font-size':10,fill:p.color},n.branch_snapshot?'BRANCH / '+n.branch_snapshot:'RESOURCE / HUGGING FACE'));g.append(el('title',{},name+'\n'+n.role));g.onclick=()=>choose(name);g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose(name)}};svg.append(g)});detail()}
+function choose(name){selected=selected===name?'':name;render()}
+function evidenceHtml(evidence){return evidence.map(e=>'<div class="source"><a target="_blank" rel="noopener" href="'+esc(e.url)+'">'+esc(e.label)+'</a></div>').join('')}
+function repositoryHtml(n){const title=n.repository_url.includes('github.com')?'GitHub 仓库':'远端仓库';return '<p><strong>'+title+'</strong><br><a target="_blank" rel="noopener" href="'+esc(n.repository_url)+'">'+esc(n.repository_url)+'</a></p>'+(n.page?'<p><strong>'+esc(n.page.label)+'</strong><br><a target="_blank" rel="noopener" href="'+esc(n.page.url)+'">'+esc(n.page.url)+'</a>'+(n.page.note?'<br><small>'+esc(n.page.note)+'</small>':'')+'</p>':'')}
+
+function detail(){const box=document.getElementById('detail');if(!selected){box.innerHTML='<div class="tag">RO REPOSITORY MAP</div><h2>按职责找仓库</h2><p>已核对 <strong>'+data.nodes.filter(n=>n.name!=='RO-GRF').length+'</strong> 个本地项目，并收录 RO-GRF 资源仓库。点击节点查看完整功能、远端资料依据和直接关联。</p><p>实线表示依赖、产出、配套或导航；虚线表示人工流转；点线表示工具使用参考。每条连线的具体含义可在节点详情中查看。</p><p>未找到明确关联的仓库保留为独立节点。安装目录、通用运行组件和 REA 内部子模块不纳入图中。</p><p>搜索会淡化不匹配的节点；所有功能说明均以本地 README 为主，必要时由源码或配置补充核对。</p>';return}const n=byName.get(selected);const rel=edges.filter(e=>e.source===selected||e.target===selected);box.innerHTML='<div class="tag">'+esc(n.diagram_category)+'</div><h2>'+esc(selected)+'</h2><p><strong>'+esc(n.role)+'</strong><br>'+esc(n.description)+'</p>'+repositoryHtml(n)+'<details><summary>功能说明依据</summary>'+evidenceHtml(n.evidence)+'</details><h3>直接关系 · '+rel.length+'</h3>'+(rel.length?rel.map(e=>{const out=e.source===selected,other=out?e.target:e.source;return '<div class="relation">'+(out?'流向 → ':'来自 ← ')+'<button data-name="'+esc(other)+'">'+esc(other)+'</button><div>'+esc(e.label)+'</div><small>'+esc(modeLabels[e.mode])+'</small>'+(e.note?'<small>'+esc(e.note)+'</small>':'')+'<details><summary>关系依据</summary>'+evidenceHtml(e.evidence)+'</details></div>'}).join(''):'<p>当前未确认与图内其他仓库的直接关联，不推断部署或构建依赖。</p>');box.querySelectorAll('[data-name]').forEach(b=>b.onclick=()=>{if(!visible(b.dataset.name)){view='全部仓库';tabs()}choose(b.dataset.name)})}
+function tabs(){document.getElementById('tabs').replaceChildren(...['全部仓库','客户端链路','网站与内容','Bot 与单机'].map(v=>{const b=document.createElement('button');b.textContent=v;b.className=view===v?'active':'';b.setAttribute('aria-pressed',view===v);b.onclick=()=>{view=v;selected='';tabs();render()};return b}))}
+document.getElementById('search').oninput=e=>{query=e.target.value.toLowerCase().trim();render()};document.getElementById('reset').onclick=()=>{selected='';query='';document.getElementById('search').value='';render()};document.getElementById('download').onclick=()=>{const copy=svg.cloneNode(true);const styles=el('style',{},document.querySelector('style').textContent);copy.insertBefore(styles,copy.firstChild);copy.setAttribute('width','1330');copy.setAttribute('height',svg.viewBox.baseVal.height);const url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(copy)],{type:'image/svg+xml;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='ro-repositories.svg';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};tabs();render();
+
+</script></body></html>
+
