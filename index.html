@@ -7,7 +7,7 @@ details{font-size:12px;color:var(--muted);margin:12px 0}summary{cursor:pointer}.
 <link rel="stylesheet" href="https://repos.casualro.top/shared/site.css">
 <script defer data-site="relations" src="https://repos.casualro.top/shared/site.js"></script>
 </head><body><header><div class="eyebrow">CASUAL RAGNAROK / ENGINEERING ATLAS</div><h1>RO · 仓库关联关系图</h1><p>按本地 README 核对功能，按实际用途分类；点击仓库查看直接关联及来源。</p></header><div class="toolbar"><div id="tabs"></div><input id="search" type="search" placeholder="搜索仓库或功能…" aria-label="搜索仓库或功能"><button id="reset">重置选择</button><button id="download">导出 SVG 图</button></div><div class="legend"><span>依赖 / 产出 / 配套 / 导航</span><span class="manual">人工准备或审核迁移</span><span class="ref">工具使用参考</span></div><main class="layout"><div class="map"><svg id="graph" xmlns="http://www.w3.org/2000/svg" aria-label="仓库关系图" role="group"></svg></div><aside id="detail" aria-live="polite"></aside></main><footer id="footer"></footer><script id="repo-data" type="application/json">{
-  "verified_date": "2026-10-21",
+  "verified_date": "2026-10-22",
   "categories": [
     {
       "name": "服务端与数据",
@@ -452,11 +452,11 @@ details{font-size:12px;color:var(--muted);margin:12px 0}summary{cursor:pointer}.
       "branch_snapshot": "main",
       "repository_url": "https://github.com/Casual-Ragnarok/ragnarok-clients",
       "page": {
-        "url": "https://casual-ragnarok.github.io/ragnarok-clients/",
-        "label": "GitHub Pages",
-        "kind": "default-domain",
-        "source": "README.md",
-        "verified_date": "2026-10-21"
+        "url": "https://clients.casualro.top/",
+        "label": "客户端资源",
+        "kind": "custom-domain",
+        "source": "docs/CNAME",
+        "verified_date": "2026-10-22"
       },
       "evidence": [
         {
@@ -539,6 +539,24 @@ details{font-size:12px;color:var(--muted);margin:12px 0}summary{cursor:pointer}.
         {
           "url": "https://github.com/Casual-Ragnarok/ro-single-server/blob/master/README.md",
           "label": "ro-single-server/README.md"
+        }
+      ]
+    },
+    {
+      "name": "BrowEdit3",
+      "role": "RO 地图编辑器",
+      "description": "BrowEdit3 用于编辑 Ragnarok Online 地图，提供物体、纹理、地形高度、墙体、GAT 与光照贴图编辑；配置中可指定 GRF 和 RO 目录。上游为 Borf/BrowEdit3。",
+      "diagram_category": "工具与外部目标",
+      "branch_snapshot": "master",
+      "repository_url": "https://github.com/Casual-Ragnarok/BrowEdit3",
+      "evidence": [
+        {
+          "url": "https://github.com/Casual-Ragnarok/BrowEdit3/blob/master/docs/Readme.md",
+          "label": "BrowEdit3/docs/Readme.md"
+        },
+        {
+          "url": "https://github.com/Casual-Ragnarok/BrowEdit3/blob/master/docs/Configuration.md",
+          "label": "BrowEdit3/docs/Configuration.md"
         }
       ]
     },

@@ -10,7 +10,7 @@
     features:{url:'https://feature.casualro.top/',repository:'Casual-Ragnarok/casual-ro-feature-showcase'},
     downloads:{url:'https://grf.casualro.top/',repository:'Casual-Ragnarok/cro-patch-grf'},
     npcs:{url:'https://npc.casualro.top/',repository:'EHakker/ro-npcs'},
-    clients:{url:'https://casual-ragnarok.github.io/ragnarok-clients/',repository:'Casual-Ragnarok/ragnarok-clients'},
+    clients:{url:'https://clients.casualro.top/',repository:'Casual-Ragnarok/ragnarok-clients'},
     relations:{url:'https://repos.casualro.top/',repository:'Casual-Ragnarok/ro-repo-relation'}
   };
   const siteInfo=sites[site] || sites.docs;

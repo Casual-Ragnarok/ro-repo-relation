@@ -27,7 +27,7 @@
 | [ragexe-diff](https://github.com/Casual-Ragnarok/ragexe-diff) | Ragexe DIFF 教程、原胚与 RO 助手源码 |
 | [grf-crypto-mgr](https://github.com/Casual-Ragnarok/grf-crypto-mgr) | GRF 加解密、内存提取与素材合包 |
 | [ro-grf-res](https://github.com/Casual-Ragnarok/ro-grf-res) | GRF 素材分类与资源配置逆向推导 |
-| [ragnarok-clients](https://github.com/Casual-Ragnarok/ragnarok-clients) · [站点](https://casual-ragnarok.github.io/ragnarok-clients/) | 历年 RO 客户端资源与下载来源索引 |
+| [ragnarok-clients](https://github.com/Casual-Ragnarok/ragnarok-clients) · [站点](https://clients.casualro.top/) | 历年 RO 客户端资源与下载来源索引 |
 | [ro-single-client](https://github.com/Casual-Ragnarok/ro-single-client) | 旧单机版客户端登录与汉化补丁 |
 | [RO-GRF](https://huggingface.co/datasets/EXPM02/RO-GRF) | GRF 图档与客户端素材资源仓库 |
 
@@ -50,6 +50,7 @@
 
 | 仓库 | 职责 |
 | --- | --- |
+| [BrowEdit3](https://github.com/Casual-Ragnarok/BrowEdit3) | RO 地图、物体、地形与光照贴图编辑器 |
 | [WarpEdition](https://github.com/Casual-Ragnarok/WarpEdition) | RO 客户端 DIFF 工具与补丁脚本定制 |
 | [rea](https://github.com/EXP-Tools/rea) · [站点](https://rea.tools/) | 跨二进制、应用与运行时的逆向分析工具 |
 | [Nemo](https://gitlab.com/4144/Nemo) | RO 客户端 EXE 补丁工具 |

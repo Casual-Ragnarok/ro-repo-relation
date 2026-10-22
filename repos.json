@@ -1,5 +1,5 @@
 {
-  "verified_date": "2026-10-21",
+  "verified_date": "2026-10-22",
   "timezone": "Asia/Shanghai",
   "scope": "Local checkout and workflow inspection; no online deployment verification",
   "repositories": [
@@ -550,11 +550,11 @@
         }
       ],
       "page": {
-        "url": "https://casual-ragnarok.github.io/ragnarok-clients/",
-        "label": "GitHub Pages",
-        "kind": "default-domain",
-        "source": "README.md",
-        "verified_date": "2026-10-21"
+        "url": "https://clients.casualro.top/",
+        "label": "客户端资源",
+        "kind": "custom-domain",
+        "source": "docs/CNAME",
+        "verified_date": "2026-10-22"
       }
     },
     {
@@ -646,6 +646,27 @@
         {
           "path": "D:\\workspace\\Github\\ro-single-server\\README.md",
           "note": "本地 README 功能说明"
+        }
+      ]
+    },
+    {
+      "name": "BrowEdit3",
+      "path": "D:\\workspace\\Github\\BrowEdit3",
+      "github": "https://github.com/Casual-Ragnarok/BrowEdit3",
+      "origin": "git@ro.github.com:Casual-Ragnarok/BrowEdit3.git",
+      "branch_snapshot": "master",
+      "kind": "tool",
+      "role": "RO 地图编辑器",
+      "description": "BrowEdit3 用于编辑 Ragnarok Online 地图，提供物体、纹理、地形高度、墙体、GAT 与光照贴图编辑；配置中可指定 GRF 和 RO 目录。上游为 Borf/BrowEdit3。",
+      "diagram_category": "工具与外部目标",
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\BrowEdit3\\docs\\Readme.md",
+          "note": "编辑模式、配置与光照贴图说明"
+        },
+        {
+          "path": "D:\\workspace\\Github\\BrowEdit3\\docs\\Configuration.md",
+          "note": "GRF 与客户端目录配置"
         }
       ]
     }
