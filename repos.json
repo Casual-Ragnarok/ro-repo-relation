@@ -1189,6 +1189,26 @@
           "path": "D:\\workspace\\Github\\ro-single-client\\README.md"
         }
       ]
+    },
+    {
+      "source": "casual-ro-website",
+      "target": "ro-effects",
+      "type": "navigation",
+      "automation": "navigation",
+      "label": "文档资料子菜单",
+      "mode": "navigation",
+      "diagram": true,
+      "evidence": [
+        {
+          "path": "D:\\workspace\\Github\\casual-ro-website\\index.html",
+          "note": "官网加载公共导航脚本"
+        },
+        {
+          "path": "D:\\workspace\\Github\\ro-repo-relation\\shared\\site.js",
+          "note": "文档资料子菜单链接至 effect.casualro.top"
+        }
+      ],
+      "note": "官网通过公共导航的“文档资料 → 特效演示清单”访问 ro-effects。"
     }
   ],
   "external_targets": [
